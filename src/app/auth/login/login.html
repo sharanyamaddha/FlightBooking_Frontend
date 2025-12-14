@@ -1,1 +1,16 @@
-<p>login works!</p>
+<div class="signup-container">
+<h1>Login</h1>
+
+<label>Username</label><br>
+<input type="text" placeholder="username" name="username" [(ngModel)]="username"/>
+<br><br>
+
+
+<label>Password</label><br>
+<input type="password" placeholder="password" name="password" [(ngModel)]="password"/>
+<br><br>
+
+
+
+<button (click)="onSignin()">Login</button>
+</div>

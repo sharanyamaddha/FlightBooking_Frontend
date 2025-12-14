@@ -1,0 +1,43 @@
+.signup-container{
+    width:300px;
+    margin:50px auto;
+    border:1px solid #ccc;
+    padding:20px;
+    border-radius:5px;
+    box-shadow:0 0 10px rgba(0,0,0,0);
+}
+
+.signup-container h1{
+    text-align: center;
+  
+}
+
+.signup-container label{
+    /* display:block; */
+    font-weight: bold;
+    margin-top:10px;
+}
+
+.signup-container input,
+.signup-container select{
+    width:100%;
+    padding:8px;
+    margin-top:5px;
+    box-sizing: border-box;
+
+}
+
+.signup-container button{
+    width:100%;
+    padding:8px;
+    color:white;
+    background-color: #1976d2;
+    border:none;
+    cursor:pointer;
+    margin-top:20px;
+    border-radius:4px;
+}
+
+.signup-container button:hover{
+    background-color: #125aa0;
+}
