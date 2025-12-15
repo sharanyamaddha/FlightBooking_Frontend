@@ -6,18 +6,27 @@ import { Observable } from 'rxjs';
 })
 export class Flight {
   
-  private BASE_URL = 'http://localhost:8090/api/flights/search';
+ private BASE_URL = 'http://localhost:8090';
 
-  constructor(private http:HttpClient){}
-  //   searchFlights(from:String,to:String,departureDate:String,returnDate:String,tripType:String):Observable<any>{
-  //     const params=new HttpParams()
-  //     .set('from',from)
-  //     .set('to',to)
-  //     .set('departureDate',departureDate)
-  //     .set('returnDate',returnDate)
-  //     .set('tripType',tripType);
+   private searchResults: any[] = [];   
 
-  //     return this.http.get(`${this.BASE_URL}/search`,{params});
 
-  // }
+  constructor(private http: HttpClient) {}
+
+  searchFlights(data: any) {
+    return this.http.post(
+      `${this.BASE_URL}/flights/search`,
+      data
+    );
+  }
+
+   // Save results
+  setResults(results: any[]) {
+    this.searchResults = results;
+  }
+
+  // Get results
+  getResults(): any[] {
+    return this.searchResults;
+  }
 }
