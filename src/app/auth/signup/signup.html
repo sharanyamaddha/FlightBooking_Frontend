@@ -1,16 +1,25 @@
 <div class="signup-container">
-<h1>Register</h1>
+<h2>Register</h2>
 
 <label>Username</label><br>
 <input type="text" placeholder="username" name="username" [(ngModel)]="username"/>
+<small *ngIf="username && username.length < 3">
+      Username must be at least 3 characters
+    </small>
 <br><br>
 
 <label>Email</label><br>
 <input type="text" placeholder="abc@gmail.com" name="email" [(ngModel)]="email"/>
+  <small *ngIf="email && !isValidEmail()">
+      Enter a valid email address
+    </small>
 <br><br>
 
 <label>Password</label><br>
 <input type="password" placeholder="password" name="password" [(ngModel)]="password"/>
+<small *ngIf="password && password.length < 6">
+      Password must be at least 6 characters
+    </small>
 <br><br>
 
 <label>Role</label><br>

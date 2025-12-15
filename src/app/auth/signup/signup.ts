@@ -13,11 +13,28 @@ export class Signup {
   password:string='';
   role:string='user';
 
+    isValidEmail(): boolean {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(this.email);
+    }
+
+    isFormValid(): boolean {
+      return (
+        this.username.length >= 3 &&
+        this.isValidEmail() &&
+        this.password.length >= 6 &&
+        this.role !== ''
+      );
+    }
+
   onSignup(){
     console.log('Username:', this.username);
     console.log('Email:', this.email);
     console.log('Password:', this.password);
     console.log('Role:', this.role);
   }
+
+
+
 
 }
