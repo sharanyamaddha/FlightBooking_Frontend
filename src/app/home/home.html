@@ -1,11 +1,98 @@
-<div>
-    <h1>Flight Booking Application</h1>
-
      <p>
-    Search and book flights easily using our secure and user-friendly platform.
-  </p>
+      Search and book flights easily using our secure and user-friendly platform.
+    </p>
 
-  <button routerLink="/login">Login</button>
-  <button routerLink="/register">Sign Up</button>        
- <button routerLink="/search">Search Flights</button>
+    <div class="search-card">
+
+      <!-- Trip Type -->
+      <div class="trip-type">
+       <input type="radio" id="oneway" name="triptype" value="One Way" [(ngModel)]="tripType">
+       <label for="oneway">One Way</label>
+
+       <input type="radio" id="roundtrip" name="triptype" value="Round Trip" [(ngModel)]="tripType">
+       <label for="roundtrip">Round Trip</label>
+      </div>
+
+      <!-- FRom/To -->
+       <div class="place">
+        <div class="field">
+          <input type="text" placeholder="From" [(ngModel)]="from" (input)="filterFrom()">
+          <ul *ngIf="filteredFromAirports.length">
+            <li *ngFor="let a of filteredFromAirports" (click)="selectFrom(a)"><strong>{{ a.code }}</strong>
+          {{ a.city }} – {{ a.airport }}
+          </li>
+          </ul>
+        </div>
+
+        <div class="field">
+          <input type="text" placeholder="To" [(ngModel)]="to" (input)="filterTo()">
+          <ul *ngIf="filteredToAirports.length">
+            <li *ngFor="let a of filteredToAirports" (click)="selectTo(a)"><strong>{{ a.code }}</strong>
+          {{ a.city }} – {{ a.airport }}
+          </li>
+          </ul>
+        </div>
+
+       </div>
+
+
+    <!-- DATES -->
+    <div class="date-row">
+      <div class="date-box" (click)="depInput.showPicker()">
+        <div class="date-left">
+          <span class="label">Departure</span>
+          <span class="value">{{formatDate(departureDate)}}</span>
+        </div>
+
+        <span class="arrow">▼</span>
+        <input type="date" #depInput [(ngModel)]="departureDate"  class="real-date-input" />
+      </div>
+
+      <div class="date-box"
+          
+          (click)="retInput.showPicker()">
+          <div class="date-left">
+              <span class="label">Return</span>
+              <span class="value">{{ returnDate ? formatDate(returnDate) : 'Select return date' }}</span>
+          </div>
+          <span class="arrow">▼</span>
+          <input type="date" #retInput [(ngModel)]="returnDate"  class="real-date-input" >
+      </div>
+
+      <div class="date-box" (click)="toggleTravellerDropdown()">
+        <div class="date-left">
+          <span class="label">Travellers</span>
+          <span class="value">
+            {{ travellers }} Traveller{{ travellers > 1 ? 's' : '' }}
+          </span>
+        </div>
+
+  <span class="arrow">▼</span>
+
+  <!-- Dropdown -->
+      <div
+        class="traveller-dropdown"
+        *ngIf="showTravellerDropdown"
+        (click)="$event.stopPropagation()"
+      >
+        <div class="traveller-row">
+          <span>Adults</span>
+
+          <div class="counter">
+            <button (click)="decreaseTravellers()">−</button>
+            <span>{{ travellers }}</span>
+            <button (click)="increaseTravellers()">+</button>
+          </div>
+        </div>
+      </div>
 </div>
+
+      
+  </div>
+
+  <!-- SEARCH -->
+  <button class="search-btn" (click)="searchFlights()">
+    Search Flights
+  </button>
+
+    </div>
