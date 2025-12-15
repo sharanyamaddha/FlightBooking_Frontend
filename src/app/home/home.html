@@ -16,28 +16,18 @@
       <!-- FRom/To -->
        <div class="place">
         <div class="field">
-          <input type="text" placeholder="From" [(ngModel)]="from" (input)="filterFrom()">
-          <ul *ngIf="filteredFromAirports.length">
-            <li *ngFor="let a of filteredFromAirports" (click)="selectFrom(a)"><strong>{{ a.code }}</strong>
-          {{ a.city }} – {{ a.airport }}
-          </li>
-          </ul>
+          <input type="text" placeholder="From" [(ngModel)]="from" />
         </div>
 
         <div class="field">
-          <input type="text" placeholder="To" [(ngModel)]="to" (input)="filterTo()">
-          <ul *ngIf="filteredToAirports.length">
-            <li *ngFor="let a of filteredToAirports" (click)="selectTo(a)"><strong>{{ a.code }}</strong>
-          {{ a.city }} – {{ a.airport }}
-          </li>
-          </ul>
+          <input type="text" placeholder="To" [(ngModel)]="to" />
         </div>
 
        </div>
 
 
     <!-- DATES -->
-    <div class="date-row">
+    <!-- <div class="date-row">
       <div class="date-box" (click)="depInput.showPicker()">
         <div class="date-left">
               <span class="label">Departure</span>
@@ -65,10 +55,10 @@
           </span>
         </div>
 
-  <span class="arrow">▼</span>
+  <span class="arrow">▼</span> -->
 
   <!-- Dropdown -->
-      <div class="traveller-dropdown" *ngIf="showTravellerDropdown" (click)="$event.stopPropagation()" >
+      <!-- <div class="traveller-dropdown" *ngIf="showTravellerDropdown" (click)="$event.stopPropagation()" >
         <div class="traveller-row">
           <span>Adults</span>
 
@@ -82,7 +72,7 @@
 </div>
 
       
-  </div>
+  </div> -->
 
   <!-- SEARCH -->
   <button class="search-btn" (click)="searchFlights()">
