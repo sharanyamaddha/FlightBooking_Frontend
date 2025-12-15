@@ -16,4 +16,13 @@ export class Auth {
   login(data:any):Observable<any>{
     return this.http.post(`${this.BASE_URL}/signin`,data);
   }
+
+  getToken(): string | null {
+  return localStorage.getItem('token');
+}
+
+logout() {
+  localStorage.removeItem('token');
+}
+
 }
