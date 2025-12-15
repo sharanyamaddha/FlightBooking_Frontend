@@ -1,3 +1,30 @@
-<div>
-    
+<div class="results-container">
+
+  <h2>Available Flights</h2>
+
+  <div *ngIf="!flights.length">
+    No flights found
+  </div>
+
+  <div class="flight-card" *ngFor="let f of flights">
+    <div class="airline">
+      {{ f.airlineName }}
+    </div>
+
+    <div class="route">
+      {{ f.source }} → {{ f.destination }}
+    </div>
+
+    <div class="time">
+      Departure: {{ f.departureDateTime | date:'shortTime' }} <br>
+      Arrival: {{ f.arrivalDateTime | date:'shortTime' }}
+    </div>
+
+    <div class="seats">
+      Seats Available: {{ f.availableSeats }}
+    </div>
+
+    <button class="book-btn">Book Now</button>
+  </div>
+
 </div>
