@@ -1,33 +1,98 @@
-<div class="signup-container">
-<h2>Register</h2>
+<form #f="ngForm" class="signup-container" (ngSubmit)="onSignup(f)">
 
-<label>Username</label><br>
-<input type="text" placeholder="username" name="username" [(ngModel)]="username"/>
-<small *ngIf="username && username.length < 3">
-      Username must be at least 3 characters
-    </small>
-<br><br>
+  <h2>Register</h2>
 
-<label>Email</label><br>
-<input type="text" placeholder="abc@gmail.com" name="email" [(ngModel)]="email"/>
-  <small *ngIf="email && !isValidEmail()">
-      Enter a valid email address
-    </small>
-<br><br>
+  <!-- USERNAME -->
+  <label>Username</label><br>
+  <input
+    type="text"
+    name="username"
+    [(ngModel)]="username"
+    #usernameRef="ngModel"
+    required
+    minlength="3"
+  />
 
-<label>Password</label><br>
-<input type="password" placeholder="password" name="password" [(ngModel)]="password"/>
-<small *ngIf="password && password.length < 6">
-      Password must be at least 6 characters
-    </small>
-<br><br>
+  <small class="error"
+    *ngIf="(usernameRef.invalid && (usernameRef.touched || f.submitted))">
+    <span *ngIf="usernameRef.errors?.['required']">
+      Username is required
+    </span>
+    <span *ngIf="usernameRef.errors?.['minlength']">
+      Minimum 3 characters required
+    </span>
+  </small>
 
-<label>Role</label><br>
-<select name="role" [(ngModel)]="role">
+  <br><br>
+
+  <!-- EMAIL -->
+  <label>Email</label><br>
+  <input
+  type="email"
+  name="email"
+  [(ngModel)]="email"
+  #emailRef="ngModel"
+  required
+  pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|in|org)$"
+/>
+
+
+ <small class="error"
+  *ngIf="emailRef.invalid && (emailRef.touched || f.submitted)">
+  <span *ngIf="emailRef.errors?.['required']">
+    Email is required
+  </span>
+  <span *ngIf="emailRef.errors?.['pattern']">
+    Email must end with .com, .in or .org
+  </span>
+</small>
+
+
+  <br><br>
+
+  <!-- PASSWORD -->
+  <label>Password</label><br>
+  <input
+    type="password"
+    name="password"
+    [(ngModel)]="password"
+    #passwordRef="ngModel"
+    required
+    minlength="6"
+  />
+
+  <small class="error"
+    *ngIf="(passwordRef.invalid && (passwordRef.touched || f.submitted))">
+    <span *ngIf="passwordRef.errors?.['required']">
+      Password is required
+    </span>
+    <span *ngIf="passwordRef.errors?.['minlength']">
+      Minimum 6 characters required
+    </span>
+  </small>
+
+  <br><br>
+
+  <!-- ROLE -->
+  <label>Role</label><br>
+  <select
+    name="role"
+    [(ngModel)]="role"
+    #roleRef="ngModel"
+    required>
+    <option value="">Select role</option>
     <option value="USER">USER</option>
     <option value="ADMIN">ADMIN</option>
-</select>
-<br><br>
+  </select>
 
-<button (click)="onSignup()">Register</button>
-</div>
+  <small class="error"
+    *ngIf="(roleRef.invalid && (roleRef.touched || f.submitted))">
+    Role is required
+  </small>
+
+  <br><br>
+
+  <!-- SUBMIT -->
+  <button type="submit">Register</button>
+
+</form>

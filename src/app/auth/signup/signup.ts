@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { Auth } from '../../services/auth';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-signup',
   imports: [FormsModule,CommonModule],
@@ -17,7 +18,10 @@ export class Signup {
   username:string='';
   email:string='';
   password:string='';
-  role:string='user';
+  role:string='';
+
+  showFormError = false;
+
 
     isValidEmail(): boolean {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -33,11 +37,15 @@ export class Signup {
       );
     }
 
-  onSignup() {
-  if (!this.isFormValid()) {
-    alert('Please fill all fields correctly');
-    return;
+  onSignup(form:NgForm) {
+  if (form.invalid) {
+    this.showFormError = true;
+     form.control.markAllAsTouched();
+      alert('Please follow proper validations before submitting the form');
+    return; 
   }
+   this.showFormError = false;
+
 
   const payload = {
     username: this.username,
@@ -59,9 +67,5 @@ export class Signup {
     }
   });
 }
-
-
-
-
 
 }

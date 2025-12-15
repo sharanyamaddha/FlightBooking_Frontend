@@ -41,3 +41,19 @@
 .signup-container button:hover{
     background-color: #125aa0;
 }
+
+.error {
+  color: red;
+  font-size: 12px;
+  display: block;
+  margin-top: 4px;
+}
+
+
+
+input.ng-valid.ng-touched {
+  border: 1px solid green;
+}
+
+
+
