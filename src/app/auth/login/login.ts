@@ -1,51 +1,50 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Auth } from '../../services/auth'; 
+import { FormsModule, NgForm } from '@angular/forms';
+import { Auth } from '../../services/auth';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
 export class Login {
-  username:string='';
-  password:string='';
-  constructor(private auth: Auth,  private router: Router
-) {}
 
+  username = '';
+  password = '';
 
-  onSignin() {
+  constructor(
+    private auth: Auth,
+    private router: Router
+  ) {}
 
+  onSignin(form: NgForm) {
 
-  if (!this.username || !this.password) {
-    alert('Please enter username and password');
-    return;
-  }
-
-  const payload = {
-    username: this.username,
-    password: this.password
-  };
-
-  this.auth.login(payload).subscribe({
-    next: (res: any) => {
-      console.log('Login success:', res);
-
-      // Store JWT
-      localStorage.setItem('token', res.token);
-
-      alert('Login successful');
-
-      // Optional: navigate to home/dashboard
-      this.router.navigate(['/']);
-    },
-    error: (err) => {
-      console.error('Login failed:', err);
-      alert('Invalid username or password');
+    // FORM VALIDATION CHECK
+    if (form.invalid) {
+      alert('Please follow proper validations');
+      return;
     }
-  });
-}
 
+    const payload = {
+      username: this.username,
+      password: this.password
+    };
+
+    this.auth.login(payload).subscribe({
+      next: (res: any) => {
+        console.log('Login success', res);
+
+        localStorage.setItem('token', res.token);
+        alert('Login successful');
+
+        this.router.navigate(['/']);
+      },
+      error: () => {
+        alert('Invalid username or password');
+      }
+    });
+  }
 }

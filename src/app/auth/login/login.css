@@ -1,4 +1,4 @@
-.signup-container{
+.signin-container{
     width:400px;
     margin:50px auto;
     border:1px solid #ccc;
@@ -7,19 +7,19 @@
     box-shadow:0 0 10px rgba(0,0,0,0);
 }
 
-.signup-container h2{
+.signin-container h2{
     text-align: center;
   
 }
 
-.signup-container label{
+.signin-container label{
     /* display:block; */
     font-weight: bold;
     margin-top:10px;
 }
 
-.signup-container input,
-.signup-container select{
+.signin-container input,
+.signin-container select{
     width:100%;
     padding:8px;
     margin-top:5px;
@@ -27,7 +27,7 @@
 
 }
 
-.signup-container button{
+.signin-container button{
     width:100%;
     padding:8px;
     color:white;
@@ -38,6 +38,21 @@
     border-radius:4px;
 }
 
-.signup-container button:hover{
+.signin-container button:hover{
     background-color: #125aa0;
 }
+.error {
+  color: red;
+  font-size: 12px;
+  display: block;
+  margin-top: 4px;
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+input.ng-valid.ng-touched {
+  border: 1px solid green;
+}
+

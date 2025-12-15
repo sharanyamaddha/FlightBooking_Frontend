@@ -1,16 +1,50 @@
-<div class="signup-container">
-<h2>Login</h2>
+<form #f="ngForm" class="signin-container" (ngSubmit)="onSignin(f)">
 
-<label>Username</label><br>
-<input type="text" placeholder="username" name="username" [(ngModel)]="username"/>
+  <h2>Login</h2>
+
+  <!-- USERNAME -->
+  <label>Username</label>
+  <input
+    type="text"
+    name="username"
+    [(ngModel)]="username"
+    #usernameRef="ngModel"
+    required
+    minlength="3"
+  />
+
+  <small class="error"
+    *ngIf="usernameRef.invalid && (usernameRef.touched || f.submitted)">
+    <span *ngIf="usernameRef.errors?.['required']">
+      Username is required
+    </span>
+    <span *ngIf="usernameRef.errors?.['minlength']">
+      Minimum 3 characters required
+    </span>
+  </small>
 <br><br>
 
+  <!-- PASSWORD -->
+  <label>Password</label>
+  <input
+    type="password"
+    name="password"
+    [(ngModel)]="password"
+    #passwordRef="ngModel"
+    required
+    minlength="6"
+  />
 
-<label>Password</label><br>
-<input type="password" placeholder="password" name="password" [(ngModel)]="password"/>
-<br><br>
+  <small class="error"
+    *ngIf="passwordRef.invalid && (passwordRef.touched || f.submitted)">
+    <span *ngIf="passwordRef.errors?.['required']">
+      Password is required
+    </span>
+    <span *ngIf="passwordRef.errors?.['minlength']">
+      Minimum 6 characters required
+    </span>
+  </small>
 
+  <button type="submit">Login</button>
 
-
-<button (click)="onSignin()">Login</button>
-</div>
+</form>
