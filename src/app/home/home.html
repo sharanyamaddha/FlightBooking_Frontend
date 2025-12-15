@@ -1,16 +1,16 @@
-     <p>
+     <!-- <p>
       Search and book flights easily using our secure and user-friendly platform.
-    </p>
+    </p> -->
 
     <div class="search-card">
 
       <!-- Trip Type -->
       <div class="trip-type">
-       <input type="radio" id="oneway" name="triptype" value="One Way" [(ngModel)]="tripType">
-       <label for="oneway">One Way</label>
+          <input type="radio" id="oneway" name="triptype" value="One Way" [(ngModel)]="tripType">
+          <label for="oneway">One Way</label>
 
-       <input type="radio" id="roundtrip" name="triptype" value="Round Trip" [(ngModel)]="tripType">
-       <label for="roundtrip">Round Trip</label>
+          <input type="radio" id="roundtrip" name="triptype" value="Round Trip" [(ngModel)]="tripType">
+          <label for="roundtrip">Round Trip</label>
       </div>
 
       <!-- FRom/To -->
@@ -40,17 +40,15 @@
     <div class="date-row">
       <div class="date-box" (click)="depInput.showPicker()">
         <div class="date-left">
-          <span class="label">Departure</span>
-          <span class="value">{{formatDate(departureDate)}}</span>
+              <span class="label">Departure</span>
+              <span class="value">{{formatDate(departureDate)}}</span>
         </div>
 
         <span class="arrow">▼</span>
         <input type="date" #depInput [(ngModel)]="departureDate"  class="real-date-input" />
       </div>
 
-      <div class="date-box"
-          
-          (click)="retInput.showPicker()">
+      <div class="date-box" (click)="retInput.showPicker()">
           <div class="date-left">
               <span class="label">Return</span>
               <span class="value">{{ returnDate ? formatDate(returnDate) : 'Select return date' }}</span>
@@ -70,11 +68,7 @@
   <span class="arrow">▼</span>
 
   <!-- Dropdown -->
-      <div
-        class="traveller-dropdown"
-        *ngIf="showTravellerDropdown"
-        (click)="$event.stopPropagation()"
-      >
+      <div class="traveller-dropdown" *ngIf="showTravellerDropdown" (click)="$event.stopPropagation()" >
         <div class="traveller-row">
           <span>Adults</span>
 

@@ -188,11 +188,20 @@
 }
 
 .search-btn {
-  margin-top: 20px;
+  margin-top: 24px;
   width: 100%;
-  padding: 14px;
-  background: orange;
+  padding: 16px;
+
+  background: linear-gradient(90deg, #ff9800, #ffb300);
+  color: #000;
+
   border: none;
-  font-size: 16px;
+  border-radius: 10px;
+
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+
   cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
