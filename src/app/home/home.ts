@@ -1,10 +1,13 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {  RouterModule } from '@angular/router';
+import { Flight } from '../services/flight';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterModule,FormsModule],
+  imports: [RouterModule,FormsModule,CommonModule],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
@@ -16,6 +19,11 @@ export class Home {
   departureDate!: string;
   returnDate!: string;
   travellers=1;
+
+  constructor(private flightService: Flight,
+    private router: Router
+  ) {}
+
 
   ngOnInit(){
     const today=new Date().toISOString().split('T')[0];
@@ -33,61 +41,110 @@ export class Home {
 
   }
 
-  airports = [
-  { code: 'BLR', city: 'Bengaluru', airport: 'Kempegowda International Airport' },
-  { code: 'BOM', city: 'Mumbai', airport: 'Chhatrapati Shivaji Airport' },
-  { code: 'DEL', city: 'New Delhi', airport: 'Indira Gandhi Airport' },
-  { code: 'HYD', city: 'Hyderabad', airport: 'Rajiv Gandhi International Airport' },
-  { code: 'MAA', city: 'Chennai', airport: 'Chennai International Airport' }
-];
 
-  filteredFromAirports:any[]=[];
-  filteredToAirports:any[]=[];
+//   filteredFromAirports:any[]=[];
+//   filteredToAirports:any[]=[];
 
-  filterFrom(){
-    const value = this.from.trim().toLowerCase();
-    if (!value) {
-      this.filteredFromAirports = [];
-      return;
-    }
-    this.filteredFromAirports=this.airports.filter(a=>
-      a.city.toLowerCase().includes(this.from.toLowerCase()) ||
-      a.code.toLowerCase().includes(this.from.toLowerCase())  
-    );
-  }
+// filterFrom() {
+//   if (!this.from || this.from.trim().length < 1) {
+//     this.filteredFromAirports = [];
+//     return;
+//   }
 
-    filterTo(){
-      const value = this.to.trim().toLowerCase();
-      if (!value) {
-        this.filteredToAirports = [];
-        return;
-      }
-    this.filteredToAirports=this.airports.filter(a=>
-      a.city.toLowerCase().includes(this.to.toLowerCase()) ||
-      a.code.toLowerCase().includes(this.to.toLowerCase())  
-    );
-  }
+//   this.flightService.getAirportSuggestions(this.from)
+//     .subscribe({
+//       next: (res) => {
+//         this.filteredFromAirports = res;
+//       },
+//       error: () => {
+//         this.filteredFromAirports = [];
+//       }
+//     });
+// }
 
-  selectFrom(a:any){
-    this.from=`${a.city} (${a.code})`;
-    this.filteredFromAirports=[];
-  }
 
-  selectTo(a:any){
-    if (this.from.includes(a.code)) return;
-    this.to=`${a.city} (${a.code})`;
-    this.filteredToAirports=[];
-  }
+//     filterTo() {
+//   if (!this.to || this.to.trim().length < 1) {
+//     this.filteredToAirports = [];
+//     return;
+//   }
+
+//   this.flightService.getAirportSuggestions(this.to)
+//     .subscribe({
+//       next: (res) => {
+//         this.filteredToAirports = res;
+//       },
+//       error: () => {
+//         this.filteredToAirports = [];
+//       }
+//     });
+// }
+
+  // selectFrom(a:any){
+  //   this.from=`${a.city} (${a.code})`;
+  //   this.filteredFromAirports=[];
+  // }
+
+  // selectTo(a:any){
+  //   if (this.from.includes(a.code)) return;
+  //   this.to=`${a.city} (${a.code})`;
+  //   this.filteredToAirports=[];
+  // }
 
   searchFlights() {
-  console.log({
-    tripType: this.tripType,
-    from: this.from,
-    to: this.to,
+  if (!this.from || !this.to) {
+    alert('Please enter source and destination');
+    return;
+  }
+
+  const payload = {
+    source: this.extractCode(this.from),
+    destination: this.extractCode(this.to),
     departureDate: this.departureDate,
-    returnDate: this.returnDate
+    travellers: this.travellers
+  };
+
+  this.flightService.searchFlights(payload).subscribe({
+    next: (res:any) => {
+      console.log('Flights from backend:', res);
+
+      //  SAVE RESULTS
+      this.flightService.setResults(res);
+
+      //  NAVIGATE
+      this.router.navigate(['/flight-search']);
+    },
+    error: () => {
+      alert('No flights found');
+    }
   });
 }
+
+airportMap: Record<string, string> = {
+  bengaluru: 'BLR',
+  bangalore: 'BLR',
+  mumbai: 'MUM',
+  delhi: 'DEL',
+  chennai: 'MAA',
+  hyderabad: 'HYD',
+  bombay:'BOM'
+};
+
+
+extractCode(value: string): string {
+  // Case 1: "Bengaluru (BLR)"
+  const match = value.match(/\(([^)]+)\)/);
+  if (match) {
+    return match[1];
+  }
+
+  // Case 2: "Bangalore" or "Mumbai"
+  const key = value.trim().toLowerCase();
+  return this.airportMap[key] || value;
+}
+
+
+
 
 showTravellerDropdown = false;
 
