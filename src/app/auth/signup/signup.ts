@@ -1,13 +1,19 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
+import { Auth } from '../../services/auth';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-signup',
-  imports: [FormsModule],
+  imports: [FormsModule,CommonModule],
   templateUrl: './signup.html',
   styleUrl: './signup.css',
 })
 export class Signup {
+    constructor(private auth: Auth,
+    private router: Router
+    ) {}
+
   username:string='';
   email:string='';
   password:string='';
@@ -27,12 +33,33 @@ export class Signup {
       );
     }
 
-  onSignup(){
-    console.log('Username:', this.username);
-    console.log('Email:', this.email);
-    console.log('Password:', this.password);
-    console.log('Role:', this.role);
+  onSignup() {
+  if (!this.isFormValid()) {
+    alert('Please fill all fields correctly');
+    return;
   }
+
+  const payload = {
+    username: this.username,
+    email: this.email,
+    password: this.password,
+    role: this.role
+  };
+
+  this.auth.register(payload).subscribe({
+    next: (res) => {
+      console.log('Registration success:', res);
+      alert('User registered successfully');
+
+      this.router.navigate(['/']);
+    },
+    error: (err) => {
+      console.error('Registration failed:', err);
+      alert('Registration failed');
+    }
+  });
+}
+
 
 
 
