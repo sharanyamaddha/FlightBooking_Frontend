@@ -2,9 +2,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding:8px 30px;
-    background-color: #1976d2;
+    padding:8px 25px;
+    background-color:#0f4c81;
     color:white;
+    margin:0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
 .logo{
@@ -14,18 +16,40 @@
 
 }
 
-/* .logo img{
+.logo img{
     height:40px;
     width:auto;
     display:block;
-} */
+}
 
 .nav-links{
     display: flex;
     list-style: none;
     gap:20px;
+    align-items: center;
 }
 
-/* .nav-links li a:hover{
-    color:rgba(220, 211, 211, 0.833);
-} */
+.nav-links li a{
+    color:white;
+    text-decoration: none;
+    font-size:20px;
+    transition:background-color 0.3s ease;
+}
+
+.nav-links li a:hover{
+     color: whitesmoke;
+}
+
+.login-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.profile-icon {
+  width:auto;
+  height: 35px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
