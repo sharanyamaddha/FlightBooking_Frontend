@@ -16,7 +16,7 @@ export class Home {
   tripType: 'One Way' | 'Round Trip' = 'One Way';
   from = '';
   to = '';
-  departureDate!: string;
+  date!: string;
   returnDate!: string;
   travellers=1;
 
@@ -27,7 +27,7 @@ export class Home {
 
   ngOnInit(){
     const today=new Date().toISOString().split('T')[0];
-    this.departureDate=today;
+    this.date=today;
   }
 
   formatDate(dateStr:string): string{
@@ -97,10 +97,15 @@ export class Home {
     return;
   }
 
+  if(!this.date){
+    alert("please select a departure date");
+    return;
+  }
+
   const payload = {
     source: this.extractCode(this.from),
     destination: this.extractCode(this.to),
-    departureDate: this.departureDate,
+    date: this.date,
     travellers: this.travellers
   };
 

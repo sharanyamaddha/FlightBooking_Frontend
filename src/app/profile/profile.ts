@@ -10,7 +10,7 @@ import { Auth } from '../services/auth';
 export class Profile implements OnInit {
 
   username: string = 'Not logged in';
-  role: string = 'USER';
+  role: string = 'N/A';
 
   constructor(
     private auth: Auth,

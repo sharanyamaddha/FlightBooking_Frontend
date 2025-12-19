@@ -8,7 +8,8 @@ export class Flight {
   
  private BASE_URL = 'http://localhost:8090';
 
-   private searchResults: any[] = [];   
+   private searchResults: any[] = []; 
+   private selectedFight:any;  
 
 
   constructor(private http: HttpClient) {}
@@ -29,4 +30,25 @@ export class Flight {
   getResults(): any[] {
     return this.searchResults;
   }
+
+  setSelectedFlight(flight:any){
+    this.selectedFight=flight;
+  }
+
+  getSelectedFlight(){
+    return this.selectedFight;
+  }
+
+bookFlight(flightId:string,payload:any):Observable<any>{
+  return this.http.post(
+    `${this.BASE_URL}/booking/${flightId}`,
+    payload,
+    {
+    headers: {
+        Authorization: "Bearer " + localStorage.getItem("token")
+      }
+    }
+  );
+}
+
 }
