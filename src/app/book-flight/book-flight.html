@@ -1,0 +1,59 @@
+<div class="signup-container">
+<h2>Book Flights</h2>
+<form (ngSubmit)="submitBooking()" #f="ngForm">
+
+
+<label>Email</label>
+<input type="email" [(ngModel)]="booking.bookerEmailId" name="email" placeholder="abc@gmail.com" required>
+<br>
+
+<label>Trip Type</label>
+<select [(ngModel)]="booking.tripType" name="TripType">
+    <option value="ONE_WAY">ONE WAY</option>
+    <option value="ROUND_TRIP">ROUND TRIP</option>
+</select>
+
+<br>
+
+<div >
+    <label>Name</label>
+    <input [(ngModel)]="booking.passenger.name" name="name" placeholder="abc" required>
+
+    <br>
+
+    <label>Age</label>
+    <input type="number" [(ngModel)]="booking.passenger.age" name="age">
+
+    <br>
+
+    <label>Gender</label>
+    <select [(ngModel)]="booking.passenger.gender" name="gender">
+        <option value="MALE">MALE</option>
+        <option value="FEMALE">FEMALE</option>
+
+    </select>
+
+    <br>
+
+    <label>Seat Number</label>
+    <input [(ngModel)]="booking.passenger.seatNo" name="seatNo" placeholder="Seat No">
+
+    <br>
+
+    <label>Meal Type</label>
+    <select [(ngModel)]="booking.passenger.mealType" name="meal"
+>
+        <option value="VEG">Veg</option>
+        <option value="NON_VEG">Non Veg</option>
+    </select>
+
+    <br>
+    </div>
+
+    <button type="submit" >Book</button>
+
+
+
+
+</form>
+</div>
