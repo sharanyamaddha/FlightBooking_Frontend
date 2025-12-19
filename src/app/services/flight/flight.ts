@@ -71,9 +71,9 @@ cancelBooking(pnr:string){
   const headers=new HttpHeaders({
     'Authorization':`Bearer ${token}`
   })
-  return this.http.delete<any[]>(
+  return this.http.delete(
     `${this.BASE_URL}/booking/cancel/${pnr}`,
-    {headers}
+    {headers,responseType: 'text' as 'json'}
   )
 }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Auth } from '../../services/auth/auth';
 import { Flight } from '../../services/flight/flight';
@@ -21,7 +21,8 @@ export class Profile implements OnInit {
   constructor(
     private auth: Auth,
     private router: Router,
-    private flightService:Flight
+    private flightService:Flight,
+    private cdr:ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -52,6 +53,7 @@ export class Profile implements OnInit {
       next:(data)=>{
         this.bookings=data;
           console.log ("Bookings Data = ", this.bookings);
+          this.cdr.detectChanges(); 
       },
       error:(err)=> console.log(err)
     })
@@ -59,15 +61,18 @@ export class Profile implements OnInit {
 
   cancelBooking(pnr:string){
    this.flightService.cancelBooking(pnr).subscribe({
-    next:(data)={
+    next:(data)=>{
       alert("Ticket cancelled!");
       this.loadBookings();
+      console.log("Booking cancelled");
+      console.log("Updated booking status",this.bookings.status);
     },
     error:(err)=>{
       console.log(err)
     }
    })
   }
+
 
   logout() {
     this.auth.logout();

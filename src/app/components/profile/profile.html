@@ -33,6 +33,7 @@
         <td>{{ booking.totalAmount}}</td>
         <td>{{booking.status}}</td>
          <td>
+
     <button 
       (click)="cancelBooking(booking.pnr)" 
       [disabled]="booking.status === 'CANCELLED'"
