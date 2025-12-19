@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './book-flight.css',
 })
 export class BookFlight {
+   passengerCount:number=1
 
    flightId: string | null = null;
 
@@ -18,7 +19,7 @@ export class BookFlight {
     
     bookerEmailId:'',
     tripType:'ONE_WAY',
-    passenger:
+    passengers:[
       {
         name:'',
         age:null,
@@ -26,7 +27,7 @@ export class BookFlight {
         seatNo:'',
         mealType:''
       }
-    
+    ]
   };
 
   constructor(
@@ -41,32 +42,49 @@ export class BookFlight {
 
   }
 
-  // addPassenger(){
-  //   this.booking.passengers.push({
-  //     name:'',
-  //     age:null,
-  //     gender: '',
-  //     seatNo: '',
-  //     mealType: ''
-  //   })
-  // }
+  addPassenger(){
+    this.booking.passengers.push({
+      name:'',
+      age:null,
+      gender: '',
+      seatNo: '',
+      mealType: ''
+    })
+  }
+
+  updatePassengerForms(){
+    while(this.passengerCount>this.booking.passengers.length){
+      this.addPassenger();
+    }
+      while (this.passengerCount < this.booking.passengers.length) {
+    this.booking.passengers.pop();
+  }
+  console.log("Passengers:", this.booking.passengers.length);
+
+  }
+
 submitBooking() {
 
-  console.log("BOOKING TS OBJECT = ", this.booking);
+  console.log("Booking TS object = ", this.booking);
 
    if (!this.flightId) {
       alert("Flight Id missing!");
       return;
     }
+    if (this.booking.passengers.length!=this.passengerCount){
+      alert("Passenger Count and Form Count mismatch");
+      return;
+
+    }
   const bookingRequest = {
     bookerEmailId: this.booking.bookerEmailId,
     tripType: this.booking.tripType,
     passengers: [
-      this.booking.passenger  
+      this.booking.passengers 
     ]
   };
 
-  console.log("BOOKING REQUEST SENT TO BACKEND = ", bookingRequest);
+  console.log("booking request sent to backend = ", bookingRequest);
   this.flightService.bookFlight(this.flightId, bookingRequest).subscribe({
     next: (pnr: string) => {
     alert("Booking Successful, PNR: " + pnr);
@@ -79,7 +97,7 @@ submitBooking() {
   });
 }
 
-  }
+}
 
 
 
