@@ -4,11 +4,11 @@
 
 
 <label>Email</label>
-<input type="email" [(ngModel)]="booking.bookerEmailId" name="email" placeholder="abc@gmail.com" required>
+<input type="email" [(ngModel)]="booking.bookerEmailId" name="bookerEmailId" placeholder="abc@gmail.com" required>
 <br>
 
 <label>Trip Type</label>
-<select [(ngModel)]="booking.tripType" name="TripType">
+<select [(ngModel)]="booking.tripType" name="tripType">
     <option value="ONE_WAY">ONE WAY</option>
     <option value="ROUND_TRIP">ROUND TRIP</option>
 </select>
@@ -17,17 +17,17 @@
 
 <div >
     <label>Name</label>
-    <input [(ngModel)]="booking.passenger.name" name="name" placeholder="abc" required>
+    <input [(ngModel)]="booking.passenger.name" name="passengerName" placeholder="abc" required>
 
     <br>
 
     <label>Age</label>
-    <input type="number" [(ngModel)]="booking.passenger.age" name="age">
+    <input type="number" [(ngModel)]="booking.passenger.age" name="passengerAge">
 
     <br>
 
     <label>Gender</label>
-    <select [(ngModel)]="booking.passenger.gender" name="gender">
+    <select [(ngModel)]="booking.passenger.gender" name="passengerGender">
         <option value="MALE">MALE</option>
         <option value="FEMALE">FEMALE</option>
 
@@ -36,12 +36,12 @@
     <br>
 
     <label>Seat Number</label>
-    <input [(ngModel)]="booking.passenger.seatNo" name="seatNo" placeholder="Seat No">
+    <input [(ngModel)]="booking.passenger.seatNo" name="passengerSeatNo" placeholder="Seat No">
 
     <br>
 
     <label>Meal Type</label>
-    <select [(ngModel)]="booking.passenger.mealType" name="meal"
+    <select [(ngModel)]="booking.passenger.mealType" name="passengerMeal"
 >
         <option value="VEG">Veg</option>
         <option value="NON_VEG">Non Veg</option>

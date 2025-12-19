@@ -52,6 +52,8 @@ export class BookFlight {
   // }
 submitBooking() {
 
+  console.log("BOOKING TS OBJECT = ", this.booking);
+
    if (!this.flightId) {
       alert("Flight Id missing!");
       return;
@@ -59,12 +61,21 @@ submitBooking() {
   const bookingRequest = {
     bookerEmailId: this.booking.bookerEmailId,
     tripType: this.booking.tripType,
-    passenger: this.booking.passenger
+    passengers: [
+      this.booking.passenger  
+    ]
   };
 
+  console.log("BOOKING REQUEST SENT TO BACKEND = ", bookingRequest);
   this.flightService.bookFlight(this.flightId, bookingRequest).subscribe({
-    next: () => alert("Success"),
-    error: () => alert("Failed")
+    next: (pnr: string) => {
+    alert("Booking Successful, PNR: " + pnr);
+    console.log("PNR RECEIVED:", pnr);
+  },
+   error: (err) => {
+    console.log(err);
+    alert("Booking Failed");
+  }
   });
 }
 

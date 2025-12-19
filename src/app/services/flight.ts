@@ -45,8 +45,9 @@ bookFlight(flightId:string,payload:any):Observable<any>{
     payload,
     {
     headers: {
-        Authorization: "Bearer " + localStorage.getItem("token")
-      }
+        Authorization: "Bearer " + localStorage.getItem("token")!
+      },
+      responseType: 'text' as 'json'
     }
   );
 }
