@@ -17,7 +17,11 @@
 <label>Number of seats</label>
 <input type="number" [(ngModel)]="passengerCount" name="passengerCount" (change)="updatePassengerForms()">
 <br><br>
+
 <div *ngFor="let passenger of booking.passengers;let i=index">
+
+    <!-- Row 1 -->
+     <div class="passenger-row">
     <label>Name</label>
     <input [(ngModel)]="passenger.name" name="passengerName{{i}}" placeholder="abc" required>
 
@@ -25,7 +29,7 @@
     <br>
     <label>Age</label>
     <input type="number" [(ngModel)]="passenger.age" name="passengerAge{{i}}">
-
+    </div>
    <br>
 
     <label>Gender</label>

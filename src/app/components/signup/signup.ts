@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Auth } from '../../services/auth';
+import { Auth } from '../../services/auth/auth';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';

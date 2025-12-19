@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Flight } from '../services/flight';
+import { Flight } from '../../services/flight/flight';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
