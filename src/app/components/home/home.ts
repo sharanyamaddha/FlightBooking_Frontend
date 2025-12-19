@@ -97,6 +97,11 @@ export class Home {
     return;
   }
 
+  if(this.from==this.to){
+    alert("please enter different source and destination");
+    return;
+  }
+
   if(!this.date){
     alert("please select a departure date");
     return;

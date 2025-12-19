@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
 })
@@ -50,6 +51,30 @@ bookFlight(flightId:string,payload:any):Observable<any>{
       responseType: 'text' as 'json'
     }
   );
+}
+
+getUserBookings(email:string){
+  const token=localStorage.getItem("token");
+
+  const headers=new HttpHeaders({
+    'Authorization':`Bearer ${token}`
+  })
+  return this.http.get<any[]>(
+    `${this.BASE_URL}/booking/history/${email}`,
+    {headers}
+  );
+}
+
+cancelBooking(pnr:string){
+  const token=localStorage.getItem("token");
+
+  const headers=new HttpHeaders({
+    'Authorization':`Bearer ${token}`
+  })
+  return this.http.delete<any[]>(
+    `${this.BASE_URL}/booking/cancel/${pnr}`,
+    {headers}
+  )
 }
 
 }

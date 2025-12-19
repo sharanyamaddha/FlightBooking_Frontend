@@ -6,8 +6,41 @@
   </p>
 
     <p>
-    <strong>Role:</strong> {{ role }}
+    <strong>Role: </strong> {{ role }}
   </p>
 
-  <button (click)="logout()">Logout</button>
+  <button (click)="logout()">Logout </button>
+
+  <h2>Your Bookings</h2>
+  <table>
+    <tr>
+      <th>PNR</th>
+      <th>From</th>
+      <th>To</th>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Amount</th>
+      <th>status</th>
+    </tr>
+
+    <tr *ngFor="let booking of bookings">
+        <td>{{booking.pnr}} </td>
+        <td> {{ booking.source }}</td>
+        <td> {{ booking.destination }}</td>
+        <td> {{ booking.bookingDateTime.split('T')[0] }}</td>
+        <td> {{ booking.bookingDateTime.split('T')[1] }}</td>
+
+        <td>{{ booking.totalAmount}}</td>
+        <td>{{booking.status}}</td>
+         <td>
+    <button 
+      (click)="cancelBooking(booking.pnr)" 
+      [disabled]="booking.status === 'CANCELLED'"
+    >
+      Cancel
+    </button>
+  </td>
+    </tr>
+  </table>
+
 </div>

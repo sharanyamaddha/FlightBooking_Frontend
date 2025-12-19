@@ -9,11 +9,11 @@ import { SearchByMail } from './components/search-by-mail/search-by-mail';
 
 export const routes: Routes = [
     {path:'',component:Home},
-    {path:'register',component:Signup},
+    {path:'register',component: Signup},
     {path:'login',component:Login},
     {path:'flight-search',component:FlightSearch},
     { path: 'profile', component: Profile },
     {path:'book-flight/:flightId',component:BookFlight},
-    {path:'search-by-mail',component:SearchByMail}
+    {path:'search-by-mail/:email',component:SearchByMail}
 
 ];

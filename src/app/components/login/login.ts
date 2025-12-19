@@ -38,6 +38,8 @@ export class Login {
         console.log('Login success', res);
 
         localStorage.setItem('token', res.token);
+        localStorage.setItem("email", res.email);
+
         alert('Login successful');
 
         this.router.navigate(['/']);
