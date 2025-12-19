@@ -71,7 +71,7 @@ submitBooking() {
       alert("Flight Id missing!");
       return;
     }
-    if (this.booking.passengers.length!=this.passengerCount){
+    if (this.passengerCount!=this.booking.passengers.length){
       alert("Passenger Count and Form Count mismatch");
       return;
 
@@ -79,9 +79,8 @@ submitBooking() {
   const bookingRequest = {
     bookerEmailId: this.booking.bookerEmailId,
     tripType: this.booking.tripType,
-    passengers: [
-      this.booking.passengers 
-    ]
+    passengers: this.booking.passengers 
+    
   };
 
   console.log("booking request sent to backend = ", bookingRequest);

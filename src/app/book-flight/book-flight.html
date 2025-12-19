@@ -15,21 +15,21 @@
 
 <br><br>
 <label>Number of seats</label>
-<input type="number" [(ngModel)]="passengerCount" (change)="updatePassengerForms()">
+<input type="number" [(ngModel)]="passengerCount" name="passengerCount" (change)="updatePassengerForms()">
 <br><br>
 <div *ngFor="let passenger of booking.passengers;let i=index">
     <label>Name</label>
-    <input [(ngModel)]="booking.passengers.name" name="passengerName{{i}}" placeholder="abc" required>
+    <input [(ngModel)]="passenger.name" name="passengerName{{i}}" placeholder="abc" required>
 
     
     <br>
     <label>Age</label>
-    <input type="number" [(ngModel)]="booking.passengers.age" name="passengerAge{{i}}">
+    <input type="number" [(ngModel)]="passenger.age" name="passengerAge{{i}}">
 
    <br>
 
     <label>Gender</label>
-    <select [(ngModel)]="booking.passengers.gender" name="passengerGender{{i}}">
+    <select [(ngModel)]="passenger.gender" name="passengerGender{{i}}">
         <option value="MALE">MALE</option>
         <option value="FEMALE">FEMALE</option>
 
@@ -38,12 +38,12 @@
  <br>
 
     <label>Seat Number</label>
-    <input [(ngModel)]="booking.passengers.seatNo" name="passengerSeatNo{{i}}" placeholder="Seat No">
+    <input [(ngModel)]="passenger.seatNo" name="passengerSeatNo{{i}}" placeholder="Seat No">
 
     <br>
 
     <label>Meal Type</label>
-    <select [(ngModel)]="booking.passengers.mealType" name="passengerMeal{{i}}"
+    <select [(ngModel)]="passenger.mealType" name="passengerMeal{{i}}"
 >
         <option value="VEG">Veg</option>
         <option value="NON_VEG">Non Veg</option>
