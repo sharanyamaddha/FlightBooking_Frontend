@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SearchByMail } from './search-by-mail';
+import { BookingsHistory } from './bookings-history';
 
-describe('SearchByMail', () => {
-  let component: SearchByMail;
-  let fixture: ComponentFixture<SearchByMail>;
+describe('BookingsHistory', () => {
+  let component: BookingsHistory;
+  let fixture: ComponentFixture<BookingsHistory>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SearchByMail]
+      imports: [BookingsHistory]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SearchByMail);
+    fixture = TestBed.createComponent(BookingsHistory);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
