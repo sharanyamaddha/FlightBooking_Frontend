@@ -1,5 +1,6 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { CommonModule} from '@angular/common';
+import { Component ,ViewChild } from '@angular/core';
+import { Toast } from '../toast/toast';
 import { FormsModule } from '@angular/forms';
 import {  RouterModule } from '@angular/router';
 import { Flight } from '../../services/flight/flight';
@@ -7,11 +8,13 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterModule,FormsModule,CommonModule],
+  imports: [RouterModule,FormsModule,CommonModule,Toast],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
 export class Home {
+
+  @ViewChild('toast') toast!: Toast;
 
   tripType: 'One Way' | 'Round Trip' = 'One Way';
   from = '';
@@ -39,18 +42,28 @@ export class Home {
 
 
   searchFlights() {
-  if (!this.from || !this.to) {
-    alert('Please enter source and destination');
+  if (!this.from && !this.to) {
+    this.toast.showToast('Please enter source and destination');
+    return;
+  }
+
+   if ( !this.from) {
+    this.toast.showToast('Please enter  destination');
+    return;
+  }
+
+     if ( !this.to) {
+    this.toast.showToast('Please enter  destination');
     return;
   }
 
   if(this.from==this.to){
-    alert("please enter different source and destination");
+    this.toast.showToast("please enter different source and destination");
     return;
   }
 
   if(!this.date){
-    alert("please select a departure date");
+    this.toast.showToast("please select a departure date");
     return;
   }
 
@@ -72,7 +85,7 @@ export class Home {
       this.router.navigate(['/flight-search']);
     },
     error: () => {
-      alert('No flights found');
+      this.toast.showToast('No flights found');
     }
   });
 }

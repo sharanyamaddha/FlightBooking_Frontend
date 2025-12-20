@@ -1,0 +1,20 @@
+<div *ngIf="show" class="overlay"></div>
+
+<div *ngIf="show" class="toast">
+  <div>
+    {{ message }}
+
+    <br /><br />
+
+    <button (click)="show = false" style="
+      padding:6px 20px;
+      background:#007bff;
+      color:white;
+      border:none;
+      border-radius:6px;
+      cursor:pointer;
+    ">
+      OK
+    </button>
+  </div>
+</div>
