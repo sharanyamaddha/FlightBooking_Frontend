@@ -26,70 +26,17 @@ export class Home {
 
 
   ngOnInit(){
-    const today=new Date().toISOString().split('T')[0];
-    this.date=today;
-  }
-
-  formatDate(dateStr:string): string{
-    if(!dateStr) return 'Select date';
-    const date=new Date(dateStr);
-    return date.toLocaleDateString('en-IN',{
-      weekday:'short',
-      day:'numeric',
-      month:'short',
-    })
-
+    
   }
 
 
-//   filteredFromAirports:any[]=[];
-//   filteredToAirports:any[]=[];
 
-// filterFrom() {
-//   if (!this.from || this.from.trim().length < 1) {
-//     this.filteredFromAirports = [];
-//     return;
-//   }
-
-//   this.flightService.getAirportSuggestions(this.from)
-//     .subscribe({
-//       next: (res) => {
-//         this.filteredFromAirports = res;
-//       },
-//       error: () => {
-//         this.filteredFromAirports = [];
-//       }
-//     });
-// }
+  convertToDisplay(date: string): string {
+  const [y, m, d] = date.split('-');
+  return `${d}-${m}-${y}`;
+}
 
 
-//     filterTo() {
-//   if (!this.to || this.to.trim().length < 1) {
-//     this.filteredToAirports = [];
-//     return;
-//   }
-
-//   this.flightService.getAirportSuggestions(this.to)
-//     .subscribe({
-//       next: (res) => {
-//         this.filteredToAirports = res;
-//       },
-//       error: () => {
-//         this.filteredToAirports = [];
-//       }
-//     });
-// }
-
-  // selectFrom(a:any){
-  //   this.from=`${a.city} (${a.code})`;
-  //   this.filteredFromAirports=[];
-  // }
-
-  // selectTo(a:any){
-  //   if (this.from.includes(a.code)) return;
-  //   this.to=`${a.city} (${a.code})`;
-  //   this.filteredToAirports=[];
-  // }
 
   searchFlights() {
   if (!this.from || !this.to) {

@@ -30,8 +30,8 @@
    <div class="date-row">
       <div class="date-box" (click)="depInput.showPicker()">
         <div class="date-left">
-              <span class="label">Departure</span>
-              <span class="value">{{formatDate(date)}}</span>
+              <span class="label">Departure date</span>
+            <span class="value">{{ date ? convertToDisplay(date) : 'dd-mm-yyyy' }}</span>
         </div>
 
         <span class="arrow">▼</span>

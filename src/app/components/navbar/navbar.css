@@ -46,6 +46,10 @@
   gap: 8px;
 }
 
+.logout{
+    cursor: pointer;
+}
+
 .profile-icon {
   width:auto;
   height: 35px;

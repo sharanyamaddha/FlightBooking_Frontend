@@ -10,7 +10,9 @@
     <ul class="nav-links">
         <li><a routerLink="/">Home</a></li>
         <li><a routerLink="/register">Register</a></li>
-        <li><a routerLink="/login">Login</a><li>
+        <li *ngIf="!isLoggedIn()"><a  routerLink="/login">Login</a><li>
+        <li *ngIf="isLoggedIn()" class="logout"><a  (click)="logout()">LogOut</a><li>
+   
         <img src="assets/person_11081570.png" alt="Profile" class="profile-icon" routerLink="/profile"
     />
 
