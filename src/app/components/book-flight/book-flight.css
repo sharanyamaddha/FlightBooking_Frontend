@@ -1,0 +1,79 @@
+/* Container */
+.signup-container {
+  max-width: 720px;
+  margin: 30px auto;
+  padding: 24px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* Headings */
+.signup-container h2 {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+/* Labels */
+label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: block;
+}
+
+/* Inputs */
+input,
+select {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* One column row */
+.row-1 {
+  margin-bottom: 18px;
+}
+
+/* Two column row */
+.row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+/* Three column row */
+.row-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+
+/* Passenger card */
+.passenger-card {
+  background: #f9fafc;
+  padding: 18px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #e2e6ef;
+}
+
+/* Passenger title */
+.passenger-title {
+  font-weight: 600;
+  color: #0d5aa7;
+  margin-bottom: 14px;
+}
+
+/* Submit button */
+button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background: #0d5aa7;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}

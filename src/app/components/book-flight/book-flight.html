@@ -1,65 +1,105 @@
 <div class="signup-container">
-<h2>Book Flights</h2>
-<form (ngSubmit)="submitBooking()" #f="ngForm">
+  <h2>Book Flights</h2>
 
+  <form (ngSubmit)="submitBooking()" #f="ngForm">
 
-<label>Email</label>
-<input type="email" [(ngModel)]="booking.bookerEmailId" name="bookerEmailId" placeholder="abc@gmail.com" required>
-<br><br>
-
-<label>Trip Type</label>
-<select [(ngModel)]="booking.tripType" name="tripType">
-    <option value="ONE_WAY">ONE WAY</option>
-    <option value="ROUND_TRIP">ROUND TRIP</option>
-</select>
-
-<br><br>
-<label>Number of seats</label>
-<input type="number" [(ngModel)]="passengerCount" name="passengerCount" (change)="updatePassengerForms()">
-<br><br>
-
-<div *ngFor="let passenger of booking.passengers;let i=index">
-
-    <!-- Row 1 -->
-     <div class="passenger-row">
-    <label>Name</label>
-    <input [(ngModel)]="passenger.name" name="passengerName{{i}}" placeholder="abc" required>
-
-    
-    <br>
-    <label>Age</label>
-    <input type="number" [(ngModel)]="passenger.age" name="passengerAge{{i}}">
-    </div>
-   <br>
-
-    <label>Gender</label>
-    <select [(ngModel)]="passenger.gender" name="passengerGender{{i}}">
-        <option value="MALE">MALE</option>
-        <option value="FEMALE">FEMALE</option>
-
-    </select>
-
- <br>
-
-    <label>Seat Number</label>
-    <input [(ngModel)]="passenger.seatNo" name="passengerSeatNo{{i}}" placeholder="Seat No">
-
-    <br>
-
-    <label>Meal Type</label>
-    <select [(ngModel)]="passenger.mealType" name="passengerMeal{{i}}"
->
-        <option value="VEG">Veg</option>
-        <option value="NON_VEG">Non Veg</option>
-    </select>
-
-    <br>
+    <!-- EMAIL -->
+    <div class="row-1">
+      <div>
+        <label>Email</label>
+        <input
+          type="email"
+          [(ngModel)]="booking.bookerEmailId"
+          name="bookerEmailId"
+          required
+        />
+      </div>
     </div>
 
-    <button type="submit" >Book</button>
+    <!-- TRIP TYPE + SEATS -->
+    <div class="row-2">
+      <div>
+        <label>Trip Type</label>
+        <select [(ngModel)]="booking.tripType" name="tripType">
+          <option value="ONE_WAY">ONE WAY</option>
+          <option value="ROUND_TRIP">ROUND TRIP</option>
+        </select>
+      </div>
 
+      <div>
+        <label>Number of Seats</label>
+        <input
+          type="number"
+          [(ngModel)]="passengerCount"
+          name="passengerCount"
+          (change)="updatePassengerForms()"
+        />
+      </div>
+    </div>
 
+    <!-- PASSENGERS -->
+    <div
+      *ngFor="let passenger of booking.passengers; let i=index"
+      class="passenger-card"
+    >
+      <div class="passenger-title">Passenger {{ i + 1 }}</div>
 
+      <!-- NAME + AGE -->
+      <div class="row-2">
+        <div>
+          <label>Name</label>
+          <input
+            [(ngModel)]="passenger.name"
+            name="passengerName{{i}}"
+            required
+          />
+        </div>
 
-</form>
+        <div>
+          <label>Age</label>
+          <input
+            type="number"
+            [(ngModel)]="passenger.age"
+            name="passengerAge{{i}}"
+          />
+        </div>
+      </div>
+
+      <!-- GENDER + SEAT + MEAL -->
+      <div class="row-3">
+        <div>
+          <label>Gender</label>
+          <select
+            [(ngModel)]="passenger.gender"
+            name="passengerGender{{i}}"
+          >
+            <option value="MALE">MALE</option>
+            <option value="FEMALE">FEMALE</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Seat No</label>
+          <input
+            [(ngModel)]="passenger.seatNo"
+            name="passengerSeatNo{{i}}"
+            placeholder="12A"
+          />
+        </div>
+
+        <div>
+          <label>Meal Type</label>
+          <select
+            [(ngModel)]="passenger.mealType"
+            name="passengerMeal{{i}}"
+          >
+            <option value="VEG">Veg</option>
+            <option value="NON_VEG">Non Veg</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit">Book</button>
+  </form>
 </div>
