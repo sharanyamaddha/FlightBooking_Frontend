@@ -39,6 +39,7 @@ export class Login {
 
         localStorage.setItem('token', res.token);
         localStorage.setItem("email", res.email);
+        
 
         alert('Login successful');
 

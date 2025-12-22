@@ -36,5 +36,18 @@ export class BookingsHistory {
       error:(err)=> console.log(err)
     })
   }
+   cancelBooking(pnr:string){
+   this.flightService.cancelBooking(pnr).subscribe({
+    next:(data)=>{
+      alert("Ticket cancelled!");
+      this.loadBookings();
+      console.log("Booking cancelled");
+      console.log("Updated booking status",this.bookings.status);
+    },
+    error:(err)=>{
+      console.log(err)
+    }
+   })
+  }
 
 }

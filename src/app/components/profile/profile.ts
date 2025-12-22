@@ -43,38 +43,13 @@ export class Profile implements OnInit {
       }
     }
 
-    this.loadBookings();
   }
 
-  loadBookings(){
-    const emailid= localStorage.getItem("email")!;
-    console.log("mail",emailid);
-    this.flightService.getUserBookings(emailid).subscribe({
-      next:(data)=>{
-        this.bookings=data;
-          console.log ("Bookings Data = ", this.bookings);
-          this.cdr.detectChanges(); 
-      },
-      error:(err)=> console.log(err)
-    })
-  }
-
-  cancelBooking(pnr:string){
-   this.flightService.cancelBooking(pnr).subscribe({
-    next:(data)=>{
-      alert("Ticket cancelled!");
-      this.loadBookings();
-      console.log("Booking cancelled");
-      console.log("Updated booking status",this.bookings.status);
-    },
-    error:(err)=>{
-      console.log(err)
-    }
-   })
-  }
+  
 
 
   logout() {
+    localStorage.removeItem('token');
     this.auth.logout();
     this.router.navigate(['/login']);
   }
