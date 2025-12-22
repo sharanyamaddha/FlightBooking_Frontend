@@ -1,34 +1,49 @@
+<!-- <h2 class="title">Your Bookings</h2> -->
+
+<div class="page-wrapper">
+<div class="cards">
+  <div class="card" *ngFor="let booking of bookings">
 
 
-  <h2>Your Bookings</h2>
-  <table>
-    <tr>
-      <th>PNR</th>
-      <th>From</th>
-      <th>To</th>
-      <th>Date</th>
-      <th>Time</th>
-      <th>Amount</th>
-      <th>status</th>
-    </tr>
+    <div class="pnr">
+      {{ booking.pnr }}
+    </div>
 
-    <tr *ngFor="let booking of bookings">
-        <td>{{booking.pnr}} </td>
-        <td> {{ booking.source }}</td>
-        <td> {{ booking.destination }}</td>
-        <td> {{ booking.bookingDateTime.split('T')[0] }}</td>
-        <td> {{ booking.bookingDateTime.split('T')[1] }}</td>
+    <div class="route">
+      {{ booking.source }} → {{ booking.destination }}
+    </div>
 
-        <td>{{ booking.totalAmount}}</td>
-        <td>{{booking.status}}</td>
-         <td>
+    <div class="datetime">
+      {{ booking.bookingDateTime.split('T')[0] }}
+      •
+      {{ booking.bookingDateTime.split('T')[1].substring(0,5) }}
+    </div>
 
-    <button 
-      (click)="cancelBooking(booking.pnr)" 
+    <div class="info">
+      <div>
+        <small>Amount</small>
+        <p>₹{{ booking.totalAmount }}</p>
+      </div>
+
+      <div>
+        <small>Status</small>
+        <p 
+          class="status" [class.booked]="booking.status === 'BOOKED'"
+          [class.cancelled]="booking.status === 'CANCELLED'"
+        >
+          {{ booking.status }}
+        </p>
+      </div>
+    </div>
+
+    <button
+      class="cancel"
+      (click)="cancelBooking(booking.pnr)"
       [disabled]="booking.status === 'CANCELLED'"
     >
       Cancel
     </button>
-  </td>
-    </tr>
-  </table>
+
+  </div>
+</div>
+</div>

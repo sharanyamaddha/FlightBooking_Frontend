@@ -1,0 +1,90 @@
+.page-wrapper {
+  padding: 50px 10px;   
+  max-width: 1200px;    
+  margin: 0 auto;       
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(380px, 350px));
+  gap: 20px;
+  justify-content:start;
+  margin: 0 auto;
+}
+
+/* Card */
+.card {
+  position: relative;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+
+
+.pnr {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #0d5aa7;
+  background: #eef4ff;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+
+.route {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+
+.datetime {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 14px;
+}
+
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.info small {
+  font-size: 11px;
+  color: #888;
+}
+
+.info p {
+  margin: 2px 0 0;
+  font-weight: 500;
+}
+
+
+.status.booked {
+  color: #2e7d32;
+}
+
+.status.cancelled {
+  color: #c62828;
+}
+
+
+.cancel {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  border: none;
+  background: #0d5aa7;
+  color: white;
+  cursor: pointer;
+}
+
+.cancel:disabled {
+  background: #ccc;
+}
