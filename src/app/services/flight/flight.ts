@@ -77,4 +77,15 @@ cancelBooking(pnr:string){
   )
 }
 
+addFlight(flight:any){
+  const token=localStorage.getItem("token");
+
+  const headers=new HttpHeaders({
+    'Authorization':`Bearer ${token}`
+  })
+  return this.http.post(`${this.BASE_URL}/flights`,flight,
+    {headers,responseType:'text' as 'json'})
+  
+}
+
 }

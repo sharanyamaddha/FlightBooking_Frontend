@@ -6,6 +6,7 @@ import { Home } from './components/home/home';
 import { Profile } from './components/profile/profile';
 import { BookFlight } from './components/book-flight/book-flight'; 
 import { BookingsHistory } from './components/bookings-history/bookings-history';
+import { AddFlights } from './components/add-flights/add-flights';
 
 export const routes: Routes = [
     {path:'',component:Home},
@@ -14,6 +15,7 @@ export const routes: Routes = [
     {path:'flight-search',component:FlightSearch},
     { path: 'profile', component: Profile },
     {path:'book-flight/:flightId',component:BookFlight},
-    {path:'bookings-history',component:BookingsHistory}
+    {path:'bookings-history',component:BookingsHistory},
+    {path:'add-flights',component:AddFlights}
 
 ];
