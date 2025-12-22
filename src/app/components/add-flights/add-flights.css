@@ -1,0 +1,96 @@
+.container {
+  width: 500px;
+  margin: 60px auto;
+  padding: 25px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #2c3e50;
+  font-size: 26px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 4px;
+  font-size: 14px;
+  color: #34495e;
+}
+
+input,
+select {
+  padding: 10px;
+  border: 1px solid #dcdde1;
+  background: #f6f6f6;
+  border-radius: 6px;
+  outline: none;
+  width: 100%;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+input:focus,
+select:focus {
+  border-color: #2980b9;
+  background: #fff;
+  box-shadow: 0 0 4px rgba(41,128,185,0.4);
+}
+
+button {
+  padding: 12px;
+  margin-top: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  background: #3498db;
+  color: white;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+button:hover {
+  background: #2980b9;
+}
+
+button:disabled {
+  background: #a4b0be;
+  cursor: not-allowed;
+}
+
+.row{
+    display: flex;
+    gap:20px;
+}
+
+.col{
+    width:100%;
+    display:flex;
+    flex-direction: column;
+
+
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    width: 93%;
+    margin: 30px auto;
+    padding: 18px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+}

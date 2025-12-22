@@ -1,0 +1,60 @@
+<app-toast #toast></app-toast>
+<div class="container">
+  <h2>Add Flight Inventory</h2>
+
+  <form (ngSubmit)="submit()" #f="ngForm">
+
+    <label>Airline Name</label>
+    <input type="text" name="airlineName" [(ngModel)]="flight.airlineName" required />
+
+    
+    <div class="row">
+        <div class="col">
+            <label>Source</label>
+            <input type="text" name="source" [(ngModel)]="flight.source" required />
+        </div>
+
+        <div class="col">
+            <label>Destination</label>
+            <input type="text" name="destination" [(ngModel)]="flight.destination" required />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+               <label>Departure Date & Time</label>
+            <input type="datetime-local" name="departureDateTime" [(ngModel)]="flight.departureDateTime" required />
+        </div>
+
+        <div class="col">
+            <label>Arrival Date & Time</label>
+            <input type="datetime-local" name="arrivalDateTime" [(ngModel)]="flight.arrivalDateTime" required />
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col">
+            <label>Total Seats</label>
+            <input type="number" name="totalSeats" [(ngModel)]="flight.totalSeats" required />
+        </div>
+
+        <div class="col">
+            <label>Price</label>
+            <input type="number" name="price" [(ngModel)]="flight.price" required />
+        </div>
+    </div>
+   
+
+    <label>Trip Type</label>
+    <select name="tripType" [(ngModel)]="flight.tripType" required>
+      <option value="ONE_WAY">ONE WAY</option>
+      <option value="ROUND_TRIP">ROUND TRIP</option>
+    </select>
+
+    <button type="submit" [disabled]="f.invalid">Add Flight</button>
+
+
+
+  </form>
+</div>
