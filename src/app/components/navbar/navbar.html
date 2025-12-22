@@ -13,7 +13,7 @@
     <ul class="nav-links">
         <li><a routerLink="/">Home</a></li>
         <li *ngIf="auth.getRole()==='ROLE_ADMIN'"><a routerLink="/add-flights">Add Flights</a></li>
-        <li><a>Search Flights</a></li>
+        <!-- <li><a>Search Flights</a></li> -->
         <li *ngIf="!isLoggedIn()"><a routerLink="/register">Register</a></li>
         <li *ngIf="auth.getRole()==='ROLE_USER'"><a routerLink="/bookings-history">Bookings</a></li>
         <li *ngIf="!isLoggedIn()"><a  routerLink="/login">Login</a><li>
