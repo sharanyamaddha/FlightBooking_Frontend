@@ -7,6 +7,7 @@ import { Profile } from './components/profile/profile';
 import { BookFlight } from './components/book-flight/book-flight'; 
 import { BookingsHistory } from './components/bookings-history/bookings-history';
 import { AddFlights } from './components/add-flights/add-flights';
+import { ChangePassword } from './components/change-password/change-password';
 
 export const routes: Routes = [
     {path:'',component:Home},
@@ -16,6 +17,7 @@ export const routes: Routes = [
     { path: 'profile', component: Profile },
     {path:'book-flight/:flightId',component:BookFlight},
     {path:'bookings-history',component:BookingsHistory},
-    {path:'add-flights',component:AddFlights}
+    {path:'add-flights',component:AddFlights},
+    {path:'change-password',component:ChangePassword}
 
 ];
