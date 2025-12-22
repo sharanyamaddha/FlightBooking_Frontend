@@ -27,10 +27,15 @@ export class Home {
     private router: Router
   ) {}
 
+ currentIndex = 0;
 
-  ngOnInit(){
-    
+
+  ngOnInit(): void {
+    setInterval(() => {
+      this.currentIndex = (this.currentIndex + 1) % 3;
+    }, 2000); // ⏱ 3 seconds per slide
   }
+
 
 
 

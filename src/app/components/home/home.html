@@ -1,4 +1,25 @@
 <app-toast #toast></app-toast>
+<!-- Carousel -->
+<div class="carousel">
+
+  <div
+    class="slides"
+    [style.transform]="'translateX(-' + currentIndex * 100 + '%)'"
+  >
+    <img src="assets/flight1.jpg" alt="Travel the world">
+    <img src="assets/flight2.jpg" alt="Explore destinations">
+    <img src="assets/flight3.jpg" alt="Book flights easily">
+  </div>
+
+  <!-- Text stays FIXED -->
+  <div class="carousel-text">
+    <!-- <h1>Fly Smarter with FlyHigh</h1> -->
+    <!-- <p>Search, book, and manage flights effortlessly</p> -->
+  </div>
+
+</div>
+
+
 <div class="search-card">
 
       <!-- Trip Type -->
