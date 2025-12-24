@@ -1,20 +1,19 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
 import { Auth } from '../../services/auth/auth';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Toast } from '../toast/toast';
 
 @Component({
   selector: 'app-change-password',
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule,Toast],
   templateUrl: './change-password.html',
   styleUrl: './change-password.css',
 })
 export class ChangePassword {
+   @ViewChild('toast') toast!: Toast;
 
-  
-
-  // NEW
   showEdit: boolean = false;
 
   password = {
@@ -42,12 +41,12 @@ constructor(
 
   this.auth.changePassword(req).subscribe({
     next: (res: any) => {
-      alert(res.message);
+      this.toast.showToast(res.message);
       this.password = { old: '', new: '', confirm: '' };
       this.showEdit = false;
     },
     error: (err) => {
-      alert(err.error?.message || 'Failed to change password');
+      this.toast.showToast(err.error?.message || 'Failed to change password');
     }
   });
 }
