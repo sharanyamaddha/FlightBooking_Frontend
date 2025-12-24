@@ -5,16 +5,13 @@
     {{ message }}
 
     <br /><br />
+<button *ngIf="!isConfirm" (click)="close()">OK</button>
 
-    <button (click)="show = false" style="
-      padding:6px 20px;
-      background:#007bff;
-      color:white;
-      border:none;
-      border-radius:6px;
-      cursor:pointer;
-    ">
-      OK
-    </button>
+<div *ngIf="isConfirm">
+  <button (click)="confirm()" class="yes">Yes</button>
+  <button (click)="close()" class="no">No</button>
+</div>
+
+
   </div>
 </div>
