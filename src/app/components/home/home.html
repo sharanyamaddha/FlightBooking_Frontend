@@ -1,6 +1,6 @@
 <app-toast #toast></app-toast>
 <!-- Carousel -->
-<div class="carousel">
+<!-- <div class="carousel">
 
   <div
     class="slides"
@@ -9,15 +9,15 @@
     <img src="assets/flight1.jpg" alt="Travel the world">
     <img src="assets/flight2.jpg" alt="Explore destinations">
     <img src="assets/flight3.jpg" alt="Book flights easily">
-  </div>
+  </div> -->
 
   <!-- Text stays FIXED -->
-  <div class="carousel-text">
-    <!-- <h1>Fly Smarter with FlyHigh</h1> -->
-    <!-- <p>Search, book, and manage flights effortlessly</p> -->
+  <!-- <div class="carousel-text">
+    <h1>Fly Smarter with FlyHigh</h1>
+    <p>Search, book, and manage flights effortlessly</p>
   </div>
 
-</div>
+</div> -->
 
 
 <div class="search-card">
@@ -53,7 +53,7 @@
         </div>
 
         <span class="arrow">▼</span>
-        <input type="date" #depInput [(ngModel)]="date"  class="real-date-input" />
+        <input type="date" #depInput [(ngModel)]="date" [min]="today"  class="real-date-input" />
       </div>
 
   

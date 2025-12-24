@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import {  RouterModule } from '@angular/router';
 import { Flight } from '../../services/flight/flight';
 import { Router } from '@angular/router';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +16,8 @@ import { Router } from '@angular/router';
 export class Home {
 
   @ViewChild('toast') toast!: Toast;
+  today!: string;
+
 
   tripType: 'One Way' | 'Round Trip' = 'One Way';
   from = '';
@@ -24,16 +27,21 @@ export class Home {
   travellers=1;
 
   constructor(private flightService: Flight,
-    private router: Router
+    private router: Router,
+      private cdr: ChangeDetectorRef
+
   ) {}
 
  currentIndex = 0;
 
 
   ngOnInit(): void {
+    const now = new Date();
+    this.today = now.toISOString().split('T')[0];
     setInterval(() => {
       this.currentIndex = (this.currentIndex + 1) % 3;
-    }, 2000); // ⏱ 3 seconds per slide
+      this.cdr.detectChanges();
+    }, 3000); // ⏱ 3 seconds per slide
   }
 
 
