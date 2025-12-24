@@ -1,16 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Flight } from '../../services/flight/flight';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { Toast } from '../toast/toast';
 
 @Component({
   selector: 'app-book-flight',
-  imports: [FormsModule,CommonModule],
+  imports: [FormsModule,CommonModule,Toast,RouterModule],
   templateUrl: './book-flight.html',
   styleUrl: './book-flight.css',
 })
 export class BookFlight {
+
+   @ViewChild('toast') toast!: Toast;
    passengerCount:number=1
 
    flightId: string | null = null;
@@ -68,11 +71,11 @@ submitBooking() {
   console.log("Booking TS object = ", this.booking);
 
    if (!this.flightId) {
-      alert("Flight Id missing!");
+      this.toast.showToast("Flight Id missing!");
       return;
     }
     if (this.passengerCount!=this.booking.passengers.length){
-      alert("Passenger Count and Form Count mismatch");
+      this.toast.showToast("Passenger Count and Form Count mismatch");
       return;
 
     }
@@ -86,12 +89,15 @@ submitBooking() {
   console.log("booking request sent to backend = ", bookingRequest);
   this.flightService.bookFlight(this.flightId, bookingRequest).subscribe({
     next: (pnr: string) => {
-    alert("Booking Successful, PNR: " + pnr);
-    console.log("PNR RECEIVED:", pnr);
+ 
+      this.toast.showToast(
+      ' Booking Confirmed! Your PNR is ' + pnr,
+      () => this.router.navigate(['/bookings-history'])
+    );
   },
    error: (err) => {
     console.log(err);
-    alert("Booking Failed");
+      this.toast.showToast("Booking Failed");
   }
   });
 }

@@ -1,16 +1,18 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Auth } from '../../services/auth/auth';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Toast } from '../toast/toast';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule,Toast],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
 export class Login {
+   @ViewChild('toast') toast!: Toast;
 
   username = '';
   password = '';
@@ -24,7 +26,7 @@ export class Login {
 
     // FORM VALIDATION CHECK
     if (form.invalid) {
-      alert('Please follow proper validations');
+      this.toast.showToast('Please follow proper validations');
       return;
     }
 
@@ -40,13 +42,13 @@ export class Login {
         localStorage.setItem('token', res.token);
         localStorage.setItem("email", res.email);
         
-
-        alert('Login successful');
-
+      this.toast.showAndClose('Login successful', 1200, () => {
         this.router.navigate(['/']);
+      });
+
       },
       error: () => {
-        alert('Invalid username or password');
+        this.toast.showToast('Invalid username or password');
       }
     });
   }

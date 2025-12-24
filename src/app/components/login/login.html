@@ -1,4 +1,5 @@
-<form #f="ngForm" class="signin-container" (ngSubmit)="onSignin(f)">
+<app-toast #toast></app-toast>
+<form #f="ngForm" class="signin-container" >
 
   <h2>Login</h2>
 
@@ -45,6 +46,6 @@
     </span>
   </small>
 
-  <button type="submit">Login</button>
+  <button type="button" (click)="onSignin(f)">Login</button>
 
 </form>

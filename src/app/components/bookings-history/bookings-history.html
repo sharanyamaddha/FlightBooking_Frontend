@@ -1,5 +1,4 @@
-<!-- <h2 class="title">Your Bookings</h2> -->
-
+<app-toast #toast></app-toast>
 <div class="page-wrapper">
 <div class="cards">
   <div class="card" *ngFor="let booking of bookings">
@@ -36,13 +35,18 @@
       </div>
     </div>
 
-    <button
-      class="cancel"
-      (click)="cancelBooking(booking.pnr)"
-      [disabled]="booking.status === 'CANCELLED'"
-    >
-      Cancel
-    </button>
+  <button
+    class="cancel"
+    (click)="cancelBooking(booking.pnr)"
+    [disabled]="getCancelReason(booking) !== ''"
+  >
+    Cancel
+  </button>
+
+  <p class="cancel-reason" *ngIf="getCancelReason(booking) !== ''">
+    {{ getCancelReason(booking) }}
+  </p>
+
 
   </div>
 </div>
