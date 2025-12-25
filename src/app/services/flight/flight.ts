@@ -43,71 +43,34 @@ export class Flight {
 bookFlight(flightId:string,payload:any):Observable<any>{
   return this.http.post(
     `${this.BASE_URL}/booking/${flightId}`,
-    payload,
-    {
-    headers: {
-        Authorization: "Bearer " + localStorage.getItem("token")!
-      },
-      responseType: 'text' as 'json'
-    }
-  );
+    payload,{responseType: 'text' as 'json'});
 }
 
 getUserBookings(email:string){
-  const token=localStorage.getItem("token");
-
-  const headers=new HttpHeaders({
-    'Authorization':`Bearer ${token}`
-  })
   return this.http.get<any[]>(
-    `${this.BASE_URL}/booking/history/${email}`,
-    {headers}
+    `${this.BASE_URL}/booking/history/${email}`
   );
 }
 
 cancelBooking(pnr:string){
-  const token=localStorage.getItem("token");
-
-  const headers=new HttpHeaders({
-    'Authorization':`Bearer ${token}`
-  })
   return this.http.delete(
     `${this.BASE_URL}/booking/cancel/${pnr}`,
-    {headers,responseType: 'text' as 'json'}
+    {responseType: 'text' as 'json'}
   )
 }
 
 addFlight(flight:any){
-  const token=localStorage.getItem("token");
-
-  const headers=new HttpHeaders({
-    'Authorization':`Bearer ${token}`
-  })
   return this.http.post(`${this.BASE_URL}/flights`,flight,
-    {headers,responseType:'text' as 'json'})
+    {responseType:'text' as 'json'})
   
 }
 
 getSources(){
-    const token=localStorage.getItem("token");
-
-  const headers=new HttpHeaders({
-    'Authorization':`Bearer ${token}`
-  })
-  return this.http.get<string[]>(`${this.BASE_URL}/flights/sources`,
-    {headers}
-  );
+  return this.http.get<string[]>(`${this.BASE_URL}/flights/sources`);
 }
 
 getDestinations(){
-      const token=localStorage.getItem("token");
-
-  const headers=new HttpHeaders({
-    'Authorization':`Bearer ${token}`
-  })
-  return this.http.get<string[]>(`${this.BASE_URL}/flights/destinations`,
-    {headers}
-  );
+  return this.http.get<string[]>(`${this.BASE_URL}/flights/destinations`);
 }
 
 }
