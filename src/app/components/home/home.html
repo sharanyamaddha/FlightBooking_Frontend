@@ -34,11 +34,21 @@
       <!-- FRom/To -->
        <div class="place">
         <div class="field">
-          <input type="text" placeholder="From" [(ngModel)]="from" />
+          <input type="text" placeholder="From" [(ngModel)]="from" (focus)="showFromList=true" (blur)="hideFrom()">
+          <ul *ngIf="showFromList">
+            <li *ngFor="let source of sources" (mousedown)="selectFrom(source)">
+              {{source}}
+            </li>
+          </ul>
         </div>
 
         <div class="field">
-          <input type="text" placeholder="To" [(ngModel)]="to" />
+          <input type="text" placeholder="To" [(ngModel)]="to" (focus)="showToList=true" (blur)="hideTo()"/>
+              <ul *ngIf="showToList">
+            <li *ngFor="let destination of destinations" (mousedown)="selectTo(destination)">
+              {{destination}}
+            </li>
+          </ul>
         </div>
 
        </div>

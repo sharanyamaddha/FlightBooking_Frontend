@@ -77,10 +77,36 @@ button:disabled {
 
 .col{
     width:100%;
-    display:flex;
-    flex-direction: column;
+  position: relative;
+}
+
+.col ul {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  margin-top: 4px;
+  background: #ffffff;
+  border: 1px solid #d0d0d0;
+  border-radius: 8px;
+  max-height: 180px;
+  overflow-y: auto;
+  z-index: 10000;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+  padding: 0;
+  list-style: none;   
+}
+
+.col ul li {
+  padding: 10px 14px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
 
 
+.col ul li:hover {
+  background: #f2f6ff;
 }
 
 @media screen and (max-width: 600px) {
@@ -93,4 +119,15 @@ button:disabled {
   h2 {
     font-size: 22px;
   }
+}
+
+.error{
+  color: red;
+  font-size:15px;
+}
+
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched
+{
+border:2px solid red;
 }

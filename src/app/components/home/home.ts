@@ -18,6 +18,10 @@ export class Home {
   @ViewChild('toast') toast!: Toast;
   today!: string;
 
+  sources: string[]=[];
+  destinations: string[]=[];
+  showFromList=false;
+  showToList=false;
 
   tripType: 'One Way' | 'Round Trip' = 'One Way';
   from = '';
@@ -41,17 +45,22 @@ export class Home {
     setInterval(() => {
       this.currentIndex = (this.currentIndex + 1) % 3;
       this.cdr.detectChanges();
-    }, 3000); // ⏱ 3 seconds per slide
+    }, 3000); 
+
+   this.flightService.getSources().subscribe((res:any) => {
+  this.sources = res["Sources"] || res["sources"] || [];
+});
+
+this.flightService.getDestinations().subscribe((res:any) => {
+  this.destinations = res["Destinations"] || res["destinations"] || [];
+});
+
   }
-
-
-
 
   convertToDisplay(date: string): string {
   const [y, m, d] = date.split('-');
   return `${d}-${m}-${y}`;
 }
-
 
 
   searchFlights() {
@@ -90,11 +99,7 @@ export class Home {
   this.flightService.searchFlights(payload).subscribe({
     next: (res:any) => {
       console.log('Flights from backend:', res);
-
-      //  SAVE RESULTS
       this.flightService.setResults(res);
-
-      //  NAVIGATE
       this.router.navigate(['/flight-search']);
     },
     error: () => {
@@ -115,37 +120,30 @@ airportMap: Record<string, string> = {
 
 
 extractCode(value: string): string {
-  // Case 1: "Bengaluru (BLR)"
   const match = value.match(/\(([^)]+)\)/);
   if (match) {
     return match[1];
   }
-
   // Case 2: "Bangalore" or "Mumbai"
   const key = value.trim().toLowerCase();
   return this.airportMap[key] || value;
 }
 
-
-
-
-showTravellerDropdown = false;
-
-increaseTravellers() {
-  if (this.travellers < 9) {
-    this.travellers++;
-  }
+selectFrom(val:string){
+  this.from=val;
+  this.showFromList=false;
 }
 
-decreaseTravellers() {
-  if (this.travellers > 1) {
-    this.travellers--;
-  }
+selectTo(val:string){
+  this.to=val;
+  this.showToList=false;
 }
 
-toggleTravellerDropdown() {
-  this.showTravellerDropdown = !this.showTravellerDropdown;
+hideFrom(){
+  setTimeout(()=>this.showFromList=false,200);
 }
-
+hideTo(){
+  setTimeout(()=>this.showToList=false,200);
+}
 
 }

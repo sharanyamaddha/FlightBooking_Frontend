@@ -11,25 +11,47 @@
     <div class="row">
         <div class="col">
             <label>Source</label>
-            <input type="text" name="source" [(ngModel)]="flight.source" required />
+            <input type="text" name="source" [(ngModel)]="flight.source" (focus)="showFromList=true"
+       (blur)="hideFrom()" #source="ngModel" required />
+            <ul *ngIf="showFromList">
+            <li *ngFor="let source of sources" (mousedown)="selectFrom(source)">
+              {{source}}
+            </li>
+          </ul>
         </div>
 
         <div class="col">
             <label>Destination</label>
-            <input type="text" name="destination" [(ngModel)]="flight.destination" required />
-        </div>
+            <input type="text" name="destination" [(ngModel)]="flight.destination" (focus)="showToList=true"
+       (blur)="hideTo()" #destination="ngModel" required />
+                          <ul *ngIf="showToList">
+            <li *ngFor="let destination of destinations" (mousedown)="selectTo(destination)">
+              {{destination}}
+            </li>
+          </ul>
+        </div>    
     </div>
+            <div class="error" *ngIf="source.touched && destination.touched && flight.source===flight.destination">
+            Source and destination cannot be same
+
+        </div>
 
     <div class="row">
         <div class="col">
                <label>Departure Date & Time</label>
-            <input type="datetime-local" name="departureDateTime" [(ngModel)]="flight.departureDateTime" required />
+            <input type="datetime-local" name="departureDateTime" [(ngModel)]="flight.departureDateTime" #dep="ngModel" 
+            [min]="minDateTime" required />
         </div>
 
         <div class="col">
             <label>Arrival Date & Time</label>
-            <input type="datetime-local" name="arrivalDateTime" [(ngModel)]="flight.arrivalDateTime" required />
+            <input type="datetime-local" name="arrivalDateTime" [(ngModel)]="flight.arrivalDateTime" [min]="minDateTime" #arr="ngModel"
+             required />
         </div>
+    </div>
+
+    <div class="error" *ngIf="dep.touched && arr.touched && flight.arrivalDateTime<=flight.departureDateTime">
+       Arrival time must be after departure time 
     </div>
 
 

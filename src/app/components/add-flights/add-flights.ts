@@ -12,7 +12,13 @@ import { Toast } from '../toast/toast';
 })
 export class AddFlights {
 
-@ViewChild('toast', { static: true }) toast!: Toast;
+  minDateTime!: string;
+@ViewChild('toast') toast!: Toast;
+
+  sources: string[]=[];
+  destinations: string[]=[];
+  showFromList=false;
+  showToList=false;
 
   flight={
     airlineName:"",
@@ -29,21 +35,51 @@ export class AddFlights {
     private flightService:Flight
   ){}
 
+  ngOnInit():void{
+    const now=new Date();
+    now.setMinutes(now.getMinutes()-now.getTimezoneOffset())
+    this.minDateTime=now.toISOString().slice(0, 16);
+    this.flightService.getSources().subscribe((res:any) => {
+  this.sources = res["Sources"] || res["sources"] || [];
+});
+
+this.flightService.getDestinations().subscribe((res:any) => {
+  this.destinations = res["Destinations"] || res["destinations"] || [];
+});
+  }
+
   submit(){
     this.flightService.addFlight(this.flight).subscribe({
       next:(data)=>{
           console.log("Flight added :",data);
-        alert("Flight added succesfully");
+        this.toast.showToast("Flight added succesfully");
 
          setTimeout(() => {
-    // do navigation or reload later
+  
   }, 2000);
 
       },
       error:()=>{
-        alert("Error adding flight");
+        this.toast.showToast("Error adding flight");
       }
     })
 
   }
+
+  selectFrom(val:string){
+  this.flight.source=val;
+  this.showFromList=false;
+}
+
+selectTo(val:string){
+  this.flight.destination=val;
+  this.showToList=false;
+}
+
+hideFrom(){
+  setTimeout(()=>this.showFromList=false,200);
+}
+hideTo(){
+  setTimeout(()=>this.showToList=false,200);
+}
 }

@@ -88,4 +88,26 @@ addFlight(flight:any){
   
 }
 
+getSources(){
+    const token=localStorage.getItem("token");
+
+  const headers=new HttpHeaders({
+    'Authorization':`Bearer ${token}`
+  })
+  return this.http.get<string[]>(`${this.BASE_URL}/flights/sources`,
+    {headers}
+  );
+}
+
+getDestinations(){
+      const token=localStorage.getItem("token");
+
+  const headers=new HttpHeaders({
+    'Authorization':`Bearer ${token}`
+  })
+  return this.http.get<string[]>(`${this.BASE_URL}/flights/destinations`,
+    {headers}
+  );
+}
+
 }

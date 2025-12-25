@@ -1,16 +1,19 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Auth } from '../../services/auth/auth';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { Toast } from '../toast/toast';
 @Component({
   selector: 'app-signup',
-  imports: [FormsModule,CommonModule],
+  imports: [FormsModule,CommonModule,Toast],
   templateUrl: './signup.html',
   styleUrl: './signup.css',
 })
 export class Signup {
+     @ViewChild('toast') toast!: Toast;
+
     constructor(private auth: Auth,
     private router: Router
     ) {}
@@ -41,7 +44,7 @@ export class Signup {
   if (form.invalid) {
     this.showFormError = true;
      form.control.markAllAsTouched();
-      alert('Please follow proper validations before submitting the form');
+      this.toast.showToast('Please follow proper validations before submitting the form');
     return; 
   }
    this.showFormError = false;
@@ -57,13 +60,13 @@ export class Signup {
   this.auth.register(payload).subscribe({
     next: (res) => {
       console.log('Registration success:', res);
-      alert('User registered successfully');
+      this.toast.showToast('User registered successfully');
 
       this.router.navigate(['/']);
     },
     error: (err) => {
       console.error('Registration failed:', err);
-      alert('Registration failed');
+      this.toast.showToast('Registration failed');
     }
   });
 }
