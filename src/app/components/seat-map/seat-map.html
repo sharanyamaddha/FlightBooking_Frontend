@@ -1,0 +1,21 @@
+<h4>Seat Map</h4>
+
+
+<div class="seat-container">
+
+  <div class="seat-row" *ngFor="let row of seatMap">
+
+    <button
+      *ngFor="let seat of row"
+      class="seat-btn"
+      [disabled]="seat.isBooked"
+      [class.booked]="seat.isBooked"
+      [class.selected]="seat.isSelected"
+        [class.blocked]="!seat.isSelected && maxReached"
+      (click)="selectSeat(seat)">
+      {{ seat.seatNo }}
+    </button>
+
+  </div>
+
+</div>
