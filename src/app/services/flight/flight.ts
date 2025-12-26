@@ -43,34 +43,80 @@ export class Flight {
 bookFlight(flightId:string,payload:any):Observable<any>{
   return this.http.post(
     `${this.BASE_URL}/booking/${flightId}`,
-    payload,{responseType: 'text' as 'json'});
+    payload,{headers: {
+        Authorization: "Bearer " + localStorage.getItem("token")!
+      },
+      responseType: 'text' as 'json'
+    }
+  );
 }
 
 getUserBookings(email:string){
+  const token=localStorage.getItem("token");
+
+  const headers=new HttpHeaders({
+    'Authorization':`Bearer ${token}`
+  })
   return this.http.get<any[]>(
-    `${this.BASE_URL}/booking/history/${email}`
+    `${this.BASE_URL}/booking/history/${email}`,
+    {headers}
   );
 }
 
 cancelBooking(pnr:string){
+  const token=localStorage.getItem("token");
+
+  const headers=new HttpHeaders({
+    'Authorization':`Bearer ${token}`
+  })
   return this.http.delete(
     `${this.BASE_URL}/booking/cancel/${pnr}`,
-    {responseType: 'text' as 'json'}
+    {headers,responseType: 'text' as 'json'}
+  
   )
 }
 
 addFlight(flight:any){
+  const token=localStorage.getItem("token");
+
+  const headers=new HttpHeaders({
+    'Authorization':`Bearer ${token}`
+  })
   return this.http.post(`${this.BASE_URL}/flights`,flight,
-    {responseType:'text' as 'json'})
+    {headers,responseType:'text' as 'json'})
   
+
 }
 
+
 getSources(){
-  return this.http.get<string[]>(`${this.BASE_URL}/flights/sources`);
+    const token=localStorage.getItem("token");
+
+  const headers=new HttpHeaders({
+    'Authorization':`Bearer ${token}`
+  })
+  return this.http.get<string[]>(`${this.BASE_URL}/flights/sources`,
+    {headers}
+  );
 }
 
 getDestinations(){
-  return this.http.get<string[]>(`${this.BASE_URL}/flights/destinations`);
+      const token=localStorage.getItem("token");
+
+  const headers=new HttpHeaders({
+    'Authorization':`Bearer ${token}`
+  })
+  return this.http.get<string[]>(`${this.BASE_URL}/flights/destinations`,
+    {headers}
+  );
+}
+
+reserveSeats(flightId:string,body:any){
+  return this.http.post(`${this.BASE_URL}/flights/${flightId}/reserve`,body)
+}
+
+releaseSeats(flightId:string,body:any){
+  return this.http.post(`${this.BASE_URL}/flights/${flightId}/relsease`,body)
 }
 
 }

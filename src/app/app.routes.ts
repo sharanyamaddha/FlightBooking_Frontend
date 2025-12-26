@@ -9,6 +9,7 @@ import { BookingsHistory } from './components/bookings-history/bookings-history'
 import { AddFlights } from './components/add-flights/add-flights';
 import { ChangePassword } from './components/change-password/change-password';
 import { authGuard } from './guards/auth-guard';
+import { SeatMap } from './components/seat-map/seat-map';
 
 export const routes: Routes = [
     {path:'',component:Home},
@@ -19,6 +20,7 @@ export const routes: Routes = [
     {path:'book-flight/:flightId',component:BookFlight,canActivate:[authGuard]},
     {path:'bookings-history',component:BookingsHistory,canActivate:[authGuard]},
     {path:'add-flights',component:AddFlights,canActivate:[authGuard]},
-    {path:'change-password',component:ChangePassword,canActivate:[authGuard]}
+    {path:'change-password',component:ChangePassword,canActivate:[authGuard]},
+    {path:'seat-map/:flightId',component:SeatMap,canActivate:[authGuard]}
 
 ];

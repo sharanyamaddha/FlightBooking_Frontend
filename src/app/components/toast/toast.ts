@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { ToastService } from '../../services/toast/toast';
 
 @Component({
   selector: 'app-toast',
@@ -17,6 +18,12 @@ private onConfirm?: () => void;
 
 
   private afterClose: (() => void) | null = null;
+
+   constructor(private toastService: ToastService) {}
+
+  ngAfterViewInit() {
+    this.toastService.register(this);
+  }
 
 showToast(msg: string, cb?: () => void) {
     this.isConfirm = false;       

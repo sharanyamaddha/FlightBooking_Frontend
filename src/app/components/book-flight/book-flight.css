@@ -1,5 +1,11 @@
-/* Container */
+.booking-wrapper {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+}
+
 .signup-container {
+  flex:1;
   max-width: 720px;
   margin: 30px auto;
   padding: 24px;
@@ -67,7 +73,7 @@ select {
 }
 
 /* Submit button */
-button[type="submit"] {
+.book-btn {
   width: 100%;
   padding: 12px;
   border-radius: 8px;
@@ -76,4 +82,16 @@ button[type="submit"] {
   color: #fff;
   font-size: 16px;
   cursor: pointer;
+}
+
+.book-btn:disabled {
+  background: #b0c4de;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.seat-map-box {
+  width: 400px;
+  border-left: 1px solid #ddd;
+  padding-left: 20px;
 }

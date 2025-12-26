@@ -90,8 +90,8 @@ this.flightService.getDestinations().subscribe((res:any) => {
   }
 
   const payload = {
-    source: this.extractCode(this.from),
-    destination: this.extractCode(this.to),
+source: this.from.trim(),
+destination: this.to.trim(),
     date: this.date,
     travellers: this.travellers
   };

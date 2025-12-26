@@ -1,8 +1,8 @@
-<app-toast #toast></app-toast>
+<div class="booking-wrapper">
 <div class="signup-container">
   <h2>Book Flights</h2>
 
-  <form (ngSubmit)="submitBooking()" #f="ngForm">
+  <form  #f="ngForm">
 
     <!-- EMAIL -->
     <div class="row-1">
@@ -33,6 +33,7 @@
           type="number"
           [(ngModel)]="passengerCount"
           name="passengerCount"
+          (ngModelChange)="passengerCount = +$event"
           (change)="updatePassengerForms()"
         />
       </div>
@@ -101,6 +102,19 @@
       </div>
     </div>
 
-    <button type="submit" >Book</button>
+<button class="book-btn" (click)="submitBooking()"
+  [disabled]="selectedSeats.length !== passengerCount">
+  Book
+</button>
   </form>
+</div>
+
+  <div class="seat-map-box">
+    <app-seat-map 
+    [flightId]="flightId"
+    [maxSeats]="passengerCount"
+    (seatSelectionChanged)="onSeatSelection($event)"
+    ></app-seat-map>
+  </div>
+
 </div>

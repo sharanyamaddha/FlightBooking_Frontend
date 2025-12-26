@@ -4,19 +4,21 @@ import { FormsModule } from '@angular/forms';
 import { Flight } from '../../services/flight/flight';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Toast } from '../toast/toast';
+import { SeatMap } from '../seat-map/seat-map';
+import { ToastService } from '../../services/toast/toast';
 
 @Component({
   selector: 'app-book-flight',
-  imports: [FormsModule,CommonModule,Toast,RouterModule],
+  imports: [FormsModule,CommonModule,Toast,RouterModule,SeatMap],
   templateUrl: './book-flight.html',
   styleUrl: './book-flight.css',
 })
 export class BookFlight {
+//@ViewChild('globalToast', { read: Toast }) toast!: Toast;
 
-   @ViewChild('toast') toast!: Toast;
-   passengerCount:number=1
+   passengerCount:number=0;
 
-   flightId: string | null = null;
+   flightId!: string ;
 
   booking :any={
     
@@ -31,16 +33,20 @@ export class BookFlight {
         mealType:''
       }
     ]
+  
+
   };
+  
 
   constructor(
     private flightService:Flight,
     private router:Router,
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
+    private toast: ToastService,
   ){}
 
   ngOnInit(){
-    this.flightId=this.route.snapshot.paramMap.get('flightId');
+    this.flightId=this.route.snapshot.paramMap.get('flightId')!;
     
 
   }
@@ -69,13 +75,14 @@ export class BookFlight {
 submitBooking() {
 
   console.log("Booking TS object = ", this.booking);
+    console.log("Toast instance at submit:", this.toast);
 
    if (!this.flightId) {
-      this.toast.showToast("Flight Id missing!");
+      this.toast.show("Flight Id missing!");
       return;
     }
     if (this.passengerCount!=this.booking.passengers.length){
-      this.toast.showToast("Passenger Count and Form Count mismatch");
+      this.toast.show("Passenger Count and Form Count mismatch");
       return;
 
     }
@@ -90,18 +97,24 @@ submitBooking() {
   this.flightService.bookFlight(this.flightId, bookingRequest).subscribe({
     next: (pnr: string) => {
  
-      this.toast.showToast(
-      ' Booking Confirmed! Your PNR is ' + pnr,
-      () => this.router.navigate(['/bookings-history'])
-    );
+this.toast.show('Booking Confirmed! Your PNR is ' + pnr);
+setTimeout(() => this.router.navigate(['/bookings-history']), 3000);
   },
    error: (err) => {
     console.log(err);
-      this.toast.showToast("Booking Failed");
+      this.toast.show("Booking Failed");
   }
   });
 }
 
+selectedSeats:string[]=[];
+onSeatSelection(seats: string[]) {
+  this.selectedSeats = seats;
+
+  this.booking.passengers.forEach((p: any, i: number) => {
+    p.seatNo = this.selectedSeats[i] || '';
+  });
+}
 }
 
 

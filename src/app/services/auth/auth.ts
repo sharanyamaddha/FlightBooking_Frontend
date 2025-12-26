@@ -41,11 +41,19 @@
     }
     
 changePassword(data: { oldPassword: string; newPassword: string }) {
+
+  const token = localStorage.getItem('token');
+
+  const headers = new HttpHeaders({
+    Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  });
+
   return this.http.post<{ message: string }>(
     `${this.BASE_URL}/change-password`,
     data,
+    { headers }
   );
 }
-
 
     }
